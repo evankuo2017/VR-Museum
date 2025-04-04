@@ -21,7 +21,3 @@ Thumbs.db
 *.suo
 *.userprefs
 *.tmproj
-
-# Packages generated
-Packages/manifest.json
-Packages/packages-lock.json
