@@ -40,7 +40,7 @@ public class MobileCardboardReticlePointer : MonoBehaviour
     private bool isAnimatingClick = false;
     
     // ------------------------------
-    // 2. 搖桿移動相關參數
+    // 2. 搖桿與移動相關參數
     // ------------------------------
     
     [Tooltip("玩家移動速度（單位/秒）")]
@@ -49,26 +49,59 @@ public class MobileCardboardReticlePointer : MonoBehaviour
     [Tooltip("UI 搖桿元件（Fixed Joystick 預制件）")]
     public FixedJoystick fixedJoystick;
     
+    [Tooltip("指定要移動的 player 物件（必須包含 Rigidbody）")]
+    public Transform player;
+    
+    private Rigidbody playerRb;
+    
     // ------------------------------
-    // 3. 螢幕點擊判斷（回復原點擊邏輯）
+    // 3. 使用 InputAction 處理觸控輸入
     // ------------------------------
     
-    private bool _isScreenTouched
+    private InputAction touchAction;
+
+    private void OnEnable()
     {
-        get
+        // 建立一個 PassThrough 型態的 InputAction，綁定所有觸控按壓事件
+        touchAction = new InputAction(type: InputActionType.PassThrough, binding: "<Touchscreen>/touch*/press");
+        touchAction.performed += OnTouchPerformed;
+        touchAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        touchAction.performed -= OnTouchPerformed;
+        touchAction.Disable();
+    }
+    
+    // 觸控事件回調：每當有觸控按壓時執行
+    private void OnTouchPerformed(InputAction.CallbackContext context)
+    {
+        // 檢查是否有互動物件，以及是否正在播放點擊動畫
+        if (gazedAtObject == null || isAnimatingClick)
+            return;
+
+        // 檢查觸控點是否位於搖桿上（若在搖桿上則忽略此點擊）
+        Touchscreen touchScreen = Touchscreen.current;
+        if (touchScreen != null && touchScreen.touches.Count > 0)
         {
-            Touchscreen touchScreen = Touchscreen.current;
-            if (touchScreen == null)
-                return false;
-            if (!touchScreen.enabled)
-                InputSystem.EnableDevice(touchScreen);
-            // 若有觸控點且第一個觸控為 Began 狀態
-            if (touchScreen.touches.Count > 0)
-            {
-                return touchScreen.touches[0].phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began;
-            }
-            return false;
+            // 此處取得第一個觸控點的位置作為參考
+            Vector2 touchPos = touchScreen.touches[0].position.ReadValue();
+            if (IsTouchOverJoystick(touchPos))
+                return;
         }
+        
+        // 若檢查通過則觸發點擊動畫與 OnPointerClick 訊息
+        StartCoroutine(ClickAnimationAndSendMessage(gazedAtObject));
+    }
+    
+    // 依照傳入的螢幕座標檢查是否落在搖桿區域
+    private bool IsTouchOverJoystick(Vector2 position)
+    {
+        if (fixedJoystick == null)
+            return false;
+        RectTransform joystickRect = fixedJoystick.GetComponent<RectTransform>();
+        return RectTransformUtility.RectangleContainsScreenPoint(joystickRect, position, null);
     }
     
     // ------------------------------
@@ -84,15 +117,29 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         
         // 建立游標 Mesh
         CreateMesh();
+
+        // 取得 player 的 Rigidbody（請確保 player 已指定且包含 Rigidbody）
+        if (player != null)
+        {
+            playerRb = player.GetComponent<Rigidbody>();
+            if (playerRb == null)
+            {
+                Debug.LogError("Player 沒有 Rigidbody 組件，請加入 Rigidbody 以使用物理移動。");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player 未指定！");
+        }
     }
     
     // ------------------------------
-    // 5. Update - 處理游標更新與射線檢測、點擊邏輯
+    // 5. Update - 處理游標更新與射線檢測
     // ------------------------------
     
     private void Update()
     {
-        // Raycast 從當前位置沿 forward 方向偵測互動物件
+        // 使用 Raycast 從當前位置沿著 forward 方向偵測互動物件
         RaycastHit interactiveHit;
         bool interactiveHitValid = Physics.Raycast(transform.position, transform.forward,
                                                    out interactiveHit, _RETICLE_MAX_DISTANCE,
@@ -124,37 +171,40 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         }
         
         UpdateDiameters();
-        
-        // 若觸控發生且有互動物件，且觸控點不在搖桿區域內，才執行點擊動畫
-        if (_isScreenTouched && gazedAtObject != null && !isAnimatingClick && !IsTouchOverJoystick())
-        {
-            StartCoroutine(ClickAnimationAndSendMessage(gazedAtObject));
-        }
     }
     
     // ------------------------------
-    // 6. FixedUpdate - 使用 UI 搖桿控制移動（方向根據 Camera 面向）
+    // 6. FixedUpdate - 使用 UI 搖桿控制玩家移動（考慮碰撞，利用 Rigidbody）
     // ------------------------------
     
     private void FixedUpdate()
     {
-        if (fixedJoystick == null)
+        // 若無指定搖桿或玩家，則不移動
+        if (fixedJoystick == null || playerRb == null)
             return;
 
         // 從 FixedJoystick 讀取輸入 (範圍 -1 ~ 1)
         Vector2 input = new Vector2(fixedJoystick.Horizontal, fixedJoystick.Vertical);
         if (input.sqrMagnitude > 0.01f)
         {
-            // 將 UI 搖桿的 2D 輸入轉換為 3D 向量 (忽略 Y 軸)
+            // 將 UI 搖桿的 2D 輸入轉換為 3D 向量（忽略 Y 軸）
             Vector3 inputDirection = new Vector3(input.x, 0f, input.y);
             // 使用 Camera 的旋轉方向來決定移動方向
             Vector3 moveDirection = Camera.main.transform.rotation * inputDirection;
-            // 強制移動方向保持在 XZ 平面上
+            // 保持移動方向在 XZ 平面
             moveDirection.y = 0f;
             moveDirection.Normalize();
 
-            // 直接更新 Camera 的位置
-            Camera.main.transform.position += moveDirection * joystickMoveSpeed * Time.fixedDeltaTime;
+            // 計算移動位移
+            float moveDistance = joystickMoveSpeed * Time.fixedDeltaTime;
+            Vector3 newPos = playerRb.position + moveDirection * moveDistance;
+            // 使用 Rigidbody.MovePosition 考慮碰撞
+            playerRb.MovePosition(newPos);
+        }
+        else
+        {
+            // 可選：若無輸入，清空速度以防物理干擾
+            playerRb.velocity = Vector3.zero;
         }
     }
     
@@ -276,7 +326,7 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         float startModifier = 1.0f;
         float targetModifier = 0.5f;
         
-        // 縮小動畫
+        // 播放縮小動畫
         while (elapsed < halfDuration)
         {
             elapsed += Time.unscaledDeltaTime;
@@ -286,7 +336,7 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         clickModifier = targetModifier;
         
         elapsed = 0f;
-        // 恢復動畫
+        // 播放恢復動畫
         while (elapsed < halfDuration)
         {
             elapsed += Time.unscaledDeltaTime;
@@ -295,28 +345,8 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         }
         clickModifier = startModifier;
         
+        // 發送點擊事件到目標物件
         target.SendMessage("OnPointerClick", null, SendMessageOptions.DontRequireReceiver);
         isAnimatingClick = false;
-    }
-
-    // ------------------------------
-    // 10. 判斷觸控是否落在搖桿上
-    // ------------------------------
-    
-    private bool IsTouchOverJoystick()
-    {
-        if (fixedJoystick == null)
-            return false;
-
-        Touchscreen touchScreen = Touchscreen.current;
-        if (touchScreen == null || touchScreen.touches.Count == 0)
-            return false;
-
-        // 取得第一個觸控點的位置
-        Vector2 touchPos = touchScreen.touches[0].position.ReadValue();
-        RectTransform joystickRect = fixedJoystick.GetComponent<RectTransform>();
-
-        // 若搖桿使用的是 Screen Space - Overlay 或 Camera 模式，此處的第三個參數可傳 null
-        return RectTransformUtility.RectangleContainsScreenPoint(joystickRect, touchPos, null);
     }
 }

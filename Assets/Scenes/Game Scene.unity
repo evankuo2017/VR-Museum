@@ -1749,8 +1749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b42b1ec620ef8f4bbe4dcb9c94c56bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gyroRotationSpeed: 30
-  lowPassFilterFactor: 0.1
+  rotationSpeed: 30
+  noiseThreshold: 0.5
 --- !u!114 &223974233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3645,6 +3645,7 @@ MonoBehaviour:
     m_Bits: 8
   joystickMoveSpeed: 5
   fixedJoystick: {fileID: 2100109545}
+  player: {fileID: 360976229}
 --- !u!20 &633987599 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5618939454104904830, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
@@ -4285,7 +4286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133347487667301793, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5133347487667301793, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
       propertyPath: m_LocalPosition.z
