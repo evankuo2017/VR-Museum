@@ -81,27 +81,44 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         if (gazedAtObject == null || isAnimatingClick)
             return;
 
-        // 檢查觸控點是否位於搖桿上（若在搖桿上則忽略此點擊）
+        // 取得觸控點位置
         Touchscreen touchScreen = Touchscreen.current;
         if (touchScreen != null && touchScreen.touches.Count > 0)
         {
-            // 此處取得第一個觸控點的位置作為參考
             Vector2 touchPos = touchScreen.touches[0].position.ReadValue();
+            // 若觸控點落在搖桿擴大後的範圍內，則不觸發點擊事件
             if (IsTouchOverJoystick(touchPos))
                 return;
         }
         
-        // 若檢查通過則觸發點擊動畫與 OnPointerClick 訊息
+        // 檢查通過則觸發點擊動畫與 OnPointerClick 訊息
         StartCoroutine(ClickAnimationAndSendMessage(gazedAtObject));
     }
     
-    // 依照傳入的螢幕座標檢查是否落在搖桿區域
+    // 利用搖桿的 RectTransform 取得其螢幕四角，並擴大 margin 後判斷觸控點是否在此範圍內
     private bool IsTouchOverJoystick(Vector2 position)
     {
         if (fixedJoystick == null)
             return false;
+        
         RectTransform joystickRect = fixedJoystick.GetComponent<RectTransform>();
-        return RectTransformUtility.RectangleContainsScreenPoint(joystickRect, position, null);
+        Vector3[] worldCorners = new Vector3[4];
+        joystickRect.GetWorldCorners(worldCorners); // 順序：左下、左上、右上、右下
+        
+        float minX = worldCorners[0].x;
+        float minY = worldCorners[0].y;
+        float maxX = worldCorners[2].x;
+        float maxY = worldCorners[2].y;
+        
+        // 擴大範圍的 margin (由 20 改為 150 像素，可根據需求調整)
+        float margin = 150f;
+        minX -= margin;
+        minY -= margin;
+        maxX += margin;
+        maxY += margin;
+        
+        Rect expandedRect = new Rect(minX, minY, maxX - minX, maxY - minY);
+        return expandedRect.Contains(position);
     }
     
     // ------------------------------
@@ -203,7 +220,7 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         }
         else
         {
-            // 可選：若無輸入，清空速度以防物理干擾
+            // 若無輸入，清空速度以防物理干擾
             playerRb.velocity = Vector3.zero;
         }
     }

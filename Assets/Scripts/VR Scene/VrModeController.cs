@@ -15,6 +15,9 @@ public class VrModeController : MonoBehaviour
     // 場景主相機
     private Camera _mainCamera;
 
+    // 加入：等待外部觸發的旗標
+    private bool _vrEnterRequested = false;
+
     public void Start()
     {
         _mainCamera = Camera.main;
@@ -47,8 +50,14 @@ public class VrModeController : MonoBehaviour
             // 持續更新 Cardboard 所需的屏幕參數
             Api.UpdateScreenParams();
         }
-        else{
-            EnterVR();
+        else
+        {
+            // 加入：等待 loading 結束後呼叫的觸發
+            if (_vrEnterRequested)
+            {
+                _vrEnterRequested = false;
+                EnterVR();
+            }
         }
     }
 
@@ -80,6 +89,7 @@ public class VrModeController : MonoBehaviour
         else
         {
             Debug.Log("XR initialized.");
+            yield return null; // 等一幀，防止畫面錯亂
             XRGeneralSettings.Instance.Manager.StartSubsystems();
             Debug.Log("XR started.");
         }
@@ -102,8 +112,14 @@ public class VrModeController : MonoBehaviour
             _mainCamera.ResetAspect();
             _mainCamera.fieldOfView = _defaultFieldOfView;
         }
-    
+
         // 載入場景
         SceneManager.LoadScene("Menu");
+    }
+
+    // 加入：讓外部（如影片播放完畢）觸發進入 VR 模式
+    public void RequestEnterVR()
+    {
+        _vrEnterRequested = true;
     }
 }

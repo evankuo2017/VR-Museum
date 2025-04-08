@@ -16,6 +16,9 @@ public class VideoPreparationController : MonoBehaviour
     // 影片等待逾時的最大時間（秒）
     public float videoPrepareTimeout = 5.0f;
 
+    // 加入：參考場景中的 VrModeController，用來觸發 VR 模式
+    private VrModeController vrModeController;
+
     private void Start()
     {
         // 若尚未指定，嘗試取得同一物件上的所有 VideoPlayer
@@ -23,7 +26,10 @@ public class VideoPreparationController : MonoBehaviour
         {
             videoPlayers = GetComponents<VideoPlayer>();
         }
- 
+
+        // 加入：搜尋場景中的 VrModeController
+        vrModeController = FindObjectOfType<VrModeController>();
+
         // 依序檢查每個 VideoPlayer，若尚未準備好就開始 Prepare
         foreach (VideoPlayer vp in videoPlayers)
         {
@@ -82,6 +88,16 @@ public class VideoPreparationController : MonoBehaviour
         if (progressBar != null)
         {
             progressBar.gameObject.SetActive(false);
+        }
+
+        // 加入：通知 VrModeController 進入 VR 模式
+        if (vrModeController != null)
+        {
+            vrModeController.RequestEnterVR();
+        }
+        else
+        {
+            Debug.LogWarning("VrModeController not found in scene.");
         }
     }
 }

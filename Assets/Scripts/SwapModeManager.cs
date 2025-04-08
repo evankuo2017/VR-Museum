@@ -13,6 +13,7 @@ public class SwapModeManager : MonoBehaviour
 
     [Header("VR模式才會用的UI")]
     public Button reverse;
+    public Image mask;
 
     [Header("Mobile模式才會用的UI")]
     public Button BackToMenu;
@@ -32,6 +33,7 @@ public class SwapModeManager : MonoBehaviour
                 if (vrController != null) vrController.enabled = true;
                 if (vrReticlePointer != null) vrReticlePointer.enabled = true;
                 if (reverse != null) reverse.gameObject.SetActive(true);
+                if (mask != null) mask.gameObject.SetActive(true);
 
                 if (mobileController != null) mobileController.enabled = false;
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = false;
@@ -43,6 +45,7 @@ public class SwapModeManager : MonoBehaviour
                 if (vrController != null) vrController.enabled = false;
                 if (vrReticlePointer != null) vrReticlePointer.enabled = false;
                 if (reverse != null) reverse.gameObject.SetActive(false);
+                if (mask != null) mask.gameObject.SetActive(false);
 
                 if (mobileController != null) mobileController.enabled = true;
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = true;
