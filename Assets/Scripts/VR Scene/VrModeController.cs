@@ -17,6 +17,8 @@ public class VrModeController : MonoBehaviour
 
     // 加入：等待外部觸發的旗標
     private bool _vrEnterRequested = false;
+    private bool _closeButtonHandled = false;
+    private bool _gearButtonHandled = false;
 
     public void Start()
     {
@@ -34,30 +36,45 @@ public class VrModeController : MonoBehaviour
 
     public void Update()
     {
-        // 僅當 XR 初始化完成後才處理 VR 相關事件
         if (_isVrModeEnabled)
         {
-            // 按下 Cardboard 上的叉叉按鈕時退出 VR 模式並載入 Menu 場景
-            if (Api.IsCloseButtonPressed)
-            {
-                ExitVR();
-            }
-            // 按下齒輪按鈕時重新掃描設備參數
-            if (Api.IsGearButtonPressed)
-            {
-                Api.ScanDeviceParams();
-            }
-            // 持續更新 Cardboard 所需的屏幕參數
-            Api.UpdateScreenParams();
+            HandleVrButtons();
+            Api.UpdateScreenParams(); // Cardboard SDK 要求每幀更新
         }
         else
         {
-            // 加入：等待 loading 結束後呼叫的觸發
             if (_vrEnterRequested)
             {
                 _vrEnterRequested = false;
                 EnterVR();
             }
+        }
+    }
+
+    private void HandleVrButtons()
+    {
+        // 處理退出 VR 的叉叉按鈕，只觸發一次
+        bool isClosePressed = Api.IsCloseButtonPressed;
+        if (isClosePressed && !_closeButtonHandled)
+        {
+            _closeButtonHandled = true;
+            ExitVR();
+        }
+        else if (!isClosePressed)
+        {
+            _closeButtonHandled = false;
+        }
+
+        // 處理齒輪按鈕，只觸發一次
+        bool isGearPressed = Api.IsGearButtonPressed;
+        if (isGearPressed && !_gearButtonHandled)
+        {
+            _gearButtonHandled = true;
+            Api.ScanDeviceParams();
+        }
+        else if (!isGearPressed)
+        {
+            _gearButtonHandled = false;
         }
     }
 
