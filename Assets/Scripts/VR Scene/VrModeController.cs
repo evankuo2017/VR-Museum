@@ -53,26 +53,33 @@ public class VrModeController : MonoBehaviour
 
     private void HandleVrButtons()
     {
-        // 處理退出 VR 的叉叉按鈕，只觸發一次
-        bool isClosePressed = Api.IsCloseButtonPressed;
-        if (isClosePressed && !_closeButtonHandled)
+        // 改善退出 VR 的按鈕靈敏度：當按下並釋放一次即觸發
+        if (Api.IsCloseButtonPressed)
         {
-            _closeButtonHandled = true;
-            ExitVR();
+            if (!_closeButtonHandled)
+            {
+                _closeButtonHandled = true;
+            }
         }
-        else if (!isClosePressed)
+        else
         {
-            _closeButtonHandled = false;
+            if (_closeButtonHandled)
+            {
+                _closeButtonHandled = false;
+                ExitVR(); // 放開按鈕時觸發 ExitVR
+            }
         }
 
         // 處理齒輪按鈕，只觸發一次
-        bool isGearPressed = Api.IsGearButtonPressed;
-        if (isGearPressed && !_gearButtonHandled)
+        if (Api.IsGearButtonPressed)
         {
-            _gearButtonHandled = true;
-            Api.ScanDeviceParams();
+            if (!_gearButtonHandled)
+            {
+                _gearButtonHandled = true;
+                Api.ScanDeviceParams();
+            }
         }
-        else if (!isGearPressed)
+        else
         {
             _gearButtonHandled = false;
         }

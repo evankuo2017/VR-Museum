@@ -21,7 +21,7 @@ public class MobileModeController : MonoBehaviour
     private Quaternion _filteredGyroRotation;
 
     // 噪音閾值：角度差低於此值視為噪音，不做更新（單位：度）
-    public float noiseThreshold = 0.5f;
+    public float noiseThreshold = 0.3f;
 
     public void Start()
     {
