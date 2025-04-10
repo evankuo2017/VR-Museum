@@ -1,3 +1,6 @@
+/*
+用於啟動與關閉不同模式該在Game Scene使用的物件
+*/
 using UnityEngine;
 using UnityEngine.UI;  // 用於 Button 型別
 

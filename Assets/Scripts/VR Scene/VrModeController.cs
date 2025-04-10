@@ -6,6 +6,7 @@ using Google.XR.Cardboard;
 using UnityEngine;
 using UnityEngine.XR.Management;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VrModeController : MonoBehaviour
 {
@@ -20,12 +21,15 @@ public class VrModeController : MonoBehaviour
     private bool _closeButtonHandled = false;
     private bool _gearButtonHandled = false;
 
+    // canvas Loading遮罩
+    public Image mask;
+
     public void Start()
     {
         _mainCamera = Camera.main;
         // 防止螢幕休眠與調整亮度
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.brightness = 1.0f;
+        //Screen.brightness = 1.0f;
 
         // 檢查設備參數，如無則掃描（Cardboard 相關）
         if (!Api.HasDeviceParams())
@@ -98,6 +102,7 @@ public class VrModeController : MonoBehaviour
         {
             Api.ReloadDeviceParams();
         }
+        if (mask != null) mask.gameObject.SetActive(false);
     }
 
     // 啟動 XR 服務的協程

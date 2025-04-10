@@ -43,7 +43,7 @@ public class MobileModeController : MonoBehaviour
 
         // 防止螢幕休眠與調整亮度
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.brightness = 1.0f;
+        //Screen.brightness = 1.0f;
     }
 
     public void Update()
