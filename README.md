@@ -1,5 +1,5 @@
 
-# VR-Museum (0408Ver)
+# VR-Museum (0412Ver)
 Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、android系統的手機上，館內的畫作由畫家繪製，本專案利用Pika、Sora等工具將畫作製作成動畫，並置於自製的VR虛擬環境中讓觀眾觀賞
 ## 使用插件
 ### Museum Interior (付費，可登入實驗室帳號後下載)

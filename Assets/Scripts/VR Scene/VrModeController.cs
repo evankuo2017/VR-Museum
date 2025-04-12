@@ -1,6 +1,6 @@
 /*
 用來初始化 XR 服務，並控制 VR 模式的啟用與退出
- */
+*/
 using System.Collections;
 using Google.XR.Cardboard;
 using UnityEngine;
@@ -12,7 +12,7 @@ public class VrModeController : MonoBehaviour
 {
     // 非 VR 模式下默认的视野
     private const float _defaultFieldOfView = 60.0f;
-    
+
     // 場景主相機
     private Camera _mainCamera;
 
@@ -20,6 +20,9 @@ public class VrModeController : MonoBehaviour
     private bool _vrEnterRequested = false;
     private bool _closeButtonHandled = false;
     private bool _gearButtonHandled = false;
+
+    // 加入：避免重複觸發退出
+    private bool _isExiting = false;
 
     // canvas Loading遮罩
     public Image mask;
@@ -57,21 +60,16 @@ public class VrModeController : MonoBehaviour
 
     private void HandleVrButtons()
     {
-        // 改善退出 VR 的按鈕靈敏度：當按下並釋放一次即觸發
-        if (Api.IsCloseButtonPressed)
+        // 改善退出 VR 的按鈕靈敏度：按下當下即觸發，避免錯過觸發時機
+        if (Api.IsCloseButtonPressed && !_closeButtonHandled && !_isExiting)
         {
-            if (!_closeButtonHandled)
-            {
-                _closeButtonHandled = true;
-            }
+            Debug.Log("Close button pressed → ExitVR triggered");
+            _closeButtonHandled = true;
+            ExitVR(); // 按下按鈕時立即觸發 ExitVR
         }
-        else
+        else if (!Api.IsCloseButtonPressed)
         {
-            if (_closeButtonHandled)
-            {
-                _closeButtonHandled = false;
-                ExitVR(); // 放開按鈕時觸發 ExitVR
-            }
+            _closeButtonHandled = false;
         }
 
         // 處理齒輪按鈕，只觸發一次
@@ -79,6 +77,7 @@ public class VrModeController : MonoBehaviour
         {
             if (!_gearButtonHandled)
             {
+                Debug.Log("Gear button pressed → ScanDeviceParams");
                 _gearButtonHandled = true;
                 Api.ScanDeviceParams();
             }
@@ -97,6 +96,7 @@ public class VrModeController : MonoBehaviour
 
     private void EnterVR()
     {
+        Debug.Log("Request to Enter VR");
         StartCoroutine(StartXR());
         if (Api.HasNewDeviceParams())
         {
@@ -127,6 +127,9 @@ public class VrModeController : MonoBehaviour
     // 退出 VR 模式：停止 XR 子系統、解除初始化 XR Loader，並載入 Menu 場景
     private void ExitVR()
     {
+        if (_isExiting) return;
+        _isExiting = true;
+
         Debug.Log("Stopping XR...");
         XRGeneralSettings.Instance.Manager.StopSubsystems();
         Debug.Log("XR stopped.");
@@ -149,6 +152,7 @@ public class VrModeController : MonoBehaviour
     // 加入：讓外部（如影片播放完畢）觸發進入 VR 模式
     public void RequestEnterVR()
     {
+        Debug.Log("External trigger: RequestEnterVR");
         _vrEnterRequested = true;
     }
 }
