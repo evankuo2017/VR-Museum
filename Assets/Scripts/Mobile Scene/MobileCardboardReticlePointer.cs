@@ -60,6 +60,9 @@ public class MobileCardboardReticlePointer : MonoBehaviour
     
     private InputAction touchAction;
 
+    // 是否被Discription Controller鎖住點擊事件
+    public bool clickLock = false;
+
     private void OnEnable()
     {
         // 建立一個 PassThrough 型態的 InputAction，綁定所有觸控按壓事件
@@ -77,8 +80,8 @@ public class MobileCardboardReticlePointer : MonoBehaviour
     // 觸控事件回調：每當有觸控按壓時執行
     private void OnTouchPerformed(InputAction.CallbackContext context)
     {
-        // 檢查是否有互動物件，以及是否正在播放點擊動畫
-        if (gazedAtObject == null || isAnimatingClick)
+        // 檢查是否有互動物件，以及是否正在播放點擊動畫，以及是否鎖住點擊事件
+        if (gazedAtObject == null || isAnimatingClick || clickLock)
             return;
 
         // 取得觸控點位置
@@ -111,7 +114,7 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         float maxY = worldCorners[2].y;
         
         // 擴大範圍的 margin (由 20 改為 150 像素，可根據需求調整)
-        float margin = 150f;
+        float margin = 200f;
         minX -= margin;
         minY -= margin;
         maxX += margin;

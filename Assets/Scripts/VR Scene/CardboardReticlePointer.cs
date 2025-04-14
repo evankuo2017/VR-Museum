@@ -77,7 +77,9 @@ public class CardboardReticlePointer : MonoBehaviour
     private float forwardHoldTimer = 0f;
     private float backwardHoldTimer = 0f;
     
-    
+    // 是否鎖住點擊事件
+    public bool clickLock = false;
+
     // ------------------------------
     // 4. Start
     // ------------------------------
@@ -219,8 +221,8 @@ public class CardboardReticlePointer : MonoBehaviour
     /// </summary>
     private void OnForwardPerformed()
     {
-        // 如果有互動物件，執行點擊動畫
-        if (!isAnimatingClick && gazedAtObject != null)
+        // 如果有互動物件，且沒被鎖住則執行點擊動畫
+        if (!isAnimatingClick && gazedAtObject != null && !clickLock)
         {
             StartCoroutine(ClickAnimationAndSendMessage(gazedAtObject));
         }
