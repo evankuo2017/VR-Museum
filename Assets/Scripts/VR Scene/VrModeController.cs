@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.XR.Management;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using System.Linq; // 引入 LINQ 支援 FirstOrDefault
 
 public class VrModeController : MonoBehaviour
 {
@@ -27,6 +29,11 @@ public class VrModeController : MonoBehaviour
     // canvas Loading遮罩
     public Image mask;
 
+    // Discription Window 物件
+    private GameObject targetImage;
+    private TMP_Text targetTitle;
+    private TMP_Text targetText;
+
     public void Start()
     {
         _mainCamera = Camera.main;
@@ -39,6 +46,17 @@ public class VrModeController : MonoBehaviour
         {
             Api.ScanDeviceParams();
         }
+
+        targetImage = Resources.FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(go => go.name == "Discription Window");
+
+        targetText = Resources.FindObjectsOfTypeAll<TMP_Text>()
+            .FirstOrDefault(txt => txt.name == "Discribe Text");
+
+        targetTitle = Resources.FindObjectsOfTypeAll<TMP_Text>()
+            .FirstOrDefault(txt => txt.name == "Discribe Title");
+        // 設定文字的Width
+        targetText.rectTransform.sizeDelta = new Vector2(800, targetText.rectTransform.sizeDelta.y);
     }
 
     public void Update()

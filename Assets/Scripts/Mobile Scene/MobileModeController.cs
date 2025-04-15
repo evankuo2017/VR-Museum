@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.Utilities;
+using TMPro;
+using System.Linq; // 引入 LINQ 支援 FirstOrDefault
 
 public class MobileModeController : MonoBehaviour
 {
@@ -22,6 +24,11 @@ public class MobileModeController : MonoBehaviour
 
     // 噪音閾值：角度差低於此值視為噪音，不做更新（單位：度）
     public float noiseThreshold = 0.3f;
+
+    // Discription Window 物件
+    private GameObject targetImage;
+    private TMP_Text targetTitle;
+    private TMP_Text targetText;
 
     public void Start()
     {
@@ -44,6 +51,18 @@ public class MobileModeController : MonoBehaviour
         // 防止螢幕休眠與調整亮度
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         //Screen.brightness = 1.0f;
+
+        // 調整Discription Window的顯示位置與大小
+        targetImage = Resources.FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(go => go.name == "Discription Window");
+
+        targetText = Resources.FindObjectsOfTypeAll<TMP_Text>()
+            .FirstOrDefault(txt => txt.name == "Discribe Text");
+
+        targetTitle = Resources.FindObjectsOfTypeAll<TMP_Text>()
+            .FirstOrDefault(txt => txt.name == "Discribe Title");
+        // 設定文字的Width
+        targetText.rectTransform.sizeDelta = new Vector2(1000, targetText.rectTransform.sizeDelta.y);
     }
 
     public void Update()
