@@ -1,5 +1,5 @@
 
-# VR-Museum (0412Ver)
+# VR-Museum (0416Ver)
 Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、android系統的手機上，館內的畫作由畫家繪製，本專案利用Pika、Sora等工具將畫作製作成動畫，並置於自製的VR虛擬環境中讓觀眾觀賞
 ## 使用插件
 ### Museum Interior (付費，可登入實驗室帳號後下載)
@@ -15,13 +15,14 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 
 ## 新增畫作：
 1.Unity中如果要新增畫作，複製一個畫作物件，命名為[畫作名]，再複製隨便一個Video Player物件命名為Video Player[畫作簡稱]<Br>
-2.將畫作放到image資料夾(Texture Type設為Sprite(2D and UI)、影片放到video資料夾<Br>
+2.將影片放到video資料夾<Br>
 3.在Assets中create一個Render texture物件(VideoOutput物件)命名為VideoOutput[畫作簡稱]大小設為跟畫作等比例(比原本大即可)<Br>
 5.將他的VideoOutput物件及畫作品影片放到Video Player物件中<Br>
 6.將Video Player物件放到畫作物件的video中<Br>
 7.VideoOutput也要放入video的Raw Image中<Br>
-8.最後放入圖片到畫作的Image，調整畫作物件的video、image及其碰撞箱大小，以及frame的大小<Br>
-9.將整個畫作物件放到你要的位置<Br>
+8.最後調整畫作物件的video及其碰撞箱大小，以及frame的大小<Br>
+9.將畫作的Discription放到合適的位置並放上對應的文字
+10.將整個畫作物件放到你要的位置<Br>
 
 ## 關於遊戲場景
 1.本專案的遊戲場景只有一個，即Game Scene，會根據Menu場景的選擇來挑選遊戲格式，啟用對應按鈕及遊戲運作模式<Br>
@@ -46,6 +47,5 @@ Raw Image 就能顯示「VideoPlayer 播放後輸出的畫面」。<Br>
 這樣你就能在場景裡，甚至是在 VR/AR 環境中，去控制並顯示影片內容。<Br>
 
 ## 未來進度
-解決影片太多導致app大小膨脹問題<Br>
-解決影片太多時視角旋轉不流暢問題<Br>
 持續新增畫作與擴建美術館
+為畫作增加聲音功能，為描述頁增加聲音按鈕

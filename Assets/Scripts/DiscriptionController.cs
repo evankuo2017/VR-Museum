@@ -1,5 +1,5 @@
 /*
-用來控制Discription的顯示與消失
+用來控制Discription的顯示
 */
 using UnityEngine;
 using TMPro;
@@ -44,6 +44,11 @@ public class DiscriptionController : MonoBehaviour
 
     public void OnPointerClick()
     {
+        Click();
+        Click();
+    }
+    
+    private void Click(){
         Debug.Log("OnPointerClick");
         // 鎖定 reticle pointer
         CardboardReticlePointer pointer = FindObjectOfType<CardboardReticlePointer>();

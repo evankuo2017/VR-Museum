@@ -56,7 +56,7 @@ public class VrModeController : MonoBehaviour
         targetTitle = Resources.FindObjectsOfTypeAll<TMP_Text>()
             .FirstOrDefault(txt => txt.name == "Discribe Title");
         // 設定文字的Width
-        targetText.rectTransform.sizeDelta = new Vector2(800, targetText.rectTransform.sizeDelta.y);
+        targetText.rectTransform.sizeDelta = new Vector2(700, targetText.rectTransform.sizeDelta.y);
     }
 
     public void Update()
