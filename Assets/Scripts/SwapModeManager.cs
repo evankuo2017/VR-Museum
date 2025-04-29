@@ -3,6 +3,7 @@
 */
 using UnityEngine;
 using UnityEngine.UI;  // 用於 Button 型別
+using UnityEngine.SceneManagement; // 用於場景遍歷
 
 public class SwapModeManager : MonoBehaviour
 {
@@ -31,6 +32,12 @@ public class SwapModeManager : MonoBehaviour
         // 確保 GameModeManager 存在
         if (GameModeManager.Instance != null)
         {
+            // 設定各 Description 物件的 layer
+            int interactiveLayer = LayerMask.NameToLayer("interactive");
+            int uiLayer = LayerMask.NameToLayer("UI");
+            if(interactiveLayer == -1 || uiLayer == -1)
+                Debug.LogWarning("interactive or UI layer not found");
+
             if (GameModeManager.Instance.CurrentMode == GameMode.VRMode)
             {
                 if (vrController != null) vrController.enabled = true;
@@ -42,6 +49,9 @@ public class SwapModeManager : MonoBehaviour
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = false;
                 if (BackToMenu != null) BackToMenu.gameObject.SetActive(false);
                 if (fixedJoystickObject != null) fixedJoystickObject.SetActive(false);
+
+                // VR模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 UI layer
+                SetDescriptionsLayer(uiLayer);
             }
             else if (GameModeManager.Instance.CurrentMode == GameMode.MobileMode)
             {
@@ -54,11 +64,63 @@ public class SwapModeManager : MonoBehaviour
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = true;
                 if (BackToMenu != null) BackToMenu.gameObject.SetActive(true);
                 if (fixedJoystickObject != null) fixedJoystickObject.SetActive(true);
+
+                // Mobile模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 Inactive layer
+                SetDescriptionsLayer(interactiveLayer);
             }
         }
         else
         {
             Debug.LogWarning("找不到 GameModeManager，請確認首頁有正確建立並保留此單例。");
+        }
+    }
+
+    /// <summary>
+    /// 遍歷當前場景所有物件，將名稱為"Description"的物件與其子物件設置為指定 layer
+    /// </summary>
+    /// <param name="layer">目標 layer 索引</param>
+    private void SetDescriptionsLayer(int layer)
+    {
+        // 遍歷場景根物件
+        GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject root in rootObjects)
+        {
+            ApplyLayerRecursively(root, layer);
+        }
+    }
+
+    /// <summary>
+    /// 遞迴應用 layer 至目標和所有子物件
+    /// </summary>
+    /// <param name="obj">目標物件</param>
+    /// <param name="layer">目標 layer 索引</param>
+    private void ApplyLayerRecursively(GameObject obj, int layer)
+    {
+        if (obj.name == "Description")
+        {
+            SetLayerRecursively(obj, layer);
+        }
+        else
+        {
+            // 若非 Description 自身，也要繼續搜尋其子物件中是否有符合名稱的物件
+            foreach (Transform child in obj.transform)
+            {
+                ApplyLayerRecursively(child.gameObject, layer);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 將物件與其所有子物件設置為同一 layer
+    /// </summary>
+    /// <param name="obj">目標物件</param>
+    /// <param name="layer">目標 layer 索引</param>
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
         }
     }
 }
