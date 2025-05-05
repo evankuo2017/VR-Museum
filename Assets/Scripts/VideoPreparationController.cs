@@ -1,3 +1,6 @@
+/*
+    持續等待直到所有影片都準備好就把loading bar關掉
+*/
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;

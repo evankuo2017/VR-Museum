@@ -1,3 +1,6 @@
+/*
+    於遊戲場景中控制影片撥放與停止時機
+*/
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;

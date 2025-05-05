@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mobile Rule.unity
     guid: d66742f71b5624e489f5a57ed7e46d37
+  - enabled: 1
+    path: Assets/Scenes/Information.unity
+    guid: 977d07a9c42312b45ade10dec977ebc4
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 76f185b6030afd2468930019ed17aa8d, type: 2}

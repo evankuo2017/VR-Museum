@@ -33,7 +33,10 @@ public class PageManager : MonoBehaviour
         UpdateButtons();
 
         // 初始隱藏「跳過」按鈕
-        skipButton.gameObject.SetActive(false);
+        if (skipButton != null)
+        {
+            skipButton.gameObject.SetActive(false);
+        }
 
         // 當影片播放結束時，自動呼叫 OnVideoFinished 方法
         if (videoPlayer != null)
