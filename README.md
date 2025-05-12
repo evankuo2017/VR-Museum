@@ -29,23 +29,6 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 2.如果unity中測試畫面(渲染)跟手機畫面不太一樣很正常，建議可以在擴建美術館啟用flyToTest物件並用他的camera來做測試(關掉player物件)<Br>
 3.每個場景都可能會有2D部分跟3D部分，2D部分就是放在Canvas物件中的元素會直接顯示在使用者遊玩的畫面上，3D部分則是使用者看到的場景<Br>
 
-## 知識：
-
-在 Unity 中，VideoPlayer 可以將影像輸出到一個 Render Texture<Br>
-（也就是你在專案裡看到的 “video output” 這個 Render Texture<Br>
-然後再把這個 Render Texture 指定給 Raw Image 來顯示。整個流程大致如下：<Br>
-VideoPlayer 播放影片<Br>
-Unity 內建的 VideoPlayer 元件可以把影片的內容即時解碼，並輸出到各種目標<Br>
-（Camera、Render Texture、Material 等）。<Br>
-當你在 VideoPlayer 的 Target Texture（或類似參數）欄位中指定了一個 Render Texture，<Br>
-表示「把解碼出來的每一幀影片畫面輸出到這個 Render Texture 上」。<Br>
-Raw Image 讀取 Render Texture<Br>
-之後在 Raw Image 的 Texture 欄位指定同一個 Render Texture。這樣一來，<Br>
-Raw Image 就能顯示「VideoPlayer 播放後輸出的畫面」。<Br>
-由於 Raw Image 是屬於 UI 元素，這個做法能很方便地把影片嵌在 Canvas 內或當成 2D UI 的一部分來顯示。<Br>
-總結來說，這個 “video output” 的 Render Texture 就是用來「接收並儲存」影片當下每一幀的畫面，然後把它貼到你的 UI（Raw Image）上面。<Br>
-這樣你就能在場景裡，甚至是在 VR/AR 環境中，去控制並顯示影片內容。<Br>
-
 ## 未來進度
-持續新增畫作與擴建美術館
+持續新增畫作與擴建美術館(九月至少要擴增到20幅)
 為畫作增加聲音功能，為描述頁增加聲音按鈕
