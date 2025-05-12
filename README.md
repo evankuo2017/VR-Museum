@@ -21,7 +21,7 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 6.將Video Player物件放到畫作物件的video中<Br>
 7.VideoOutput也要放入video的Raw Image中<Br>
 8.最後調整畫作物件的video及其碰撞箱大小，以及frame的大小<Br>
-9.將畫作的Discription放到合適的位置並放上對應的文字
+9.將畫作的Discription放到合適的位置並放上對應的文字<Br>
 10.將整個畫作物件放到你要的位置<Br>
 
 ## 關於遊戲場景
