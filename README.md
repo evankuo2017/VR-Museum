@@ -5,7 +5,7 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 # 專案介紹
 本專案分成三大部分：Unity開發app、影片生成、影片聲音
 ## 交接
-希望到時候一個人生成影片一個人生成聲音，然後兩個人都要學Unity
+希望到時候一個人生成影片一個人生成聲音，然後兩個人都要學Unity<Br>
 其餘小部分(最好都要知道)：Apple app上架、cardboard VR眼鏡、畫家舊專案(剪刀石頭布)
 
 # Unity開發app(即此git hub專案)
@@ -43,7 +43,7 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 4. 目前安卓部分僅上架到github page，這很不方便使用者更新，也不適合未來維護，未來安卓部分請上架到Play Store
 
 # 影片生成：
-使用Pika labs： https://hackmd.io/@2e8MJipGRW2qQ0gzEQbgWA/HJQh-VHXlx
+使用Pika labs： https://hackmd.io/@2e8MJipGRW2qQ0gzEQbgWA/HJQh-VHXlx <Br>
 或使用framePackStoryboard(開發中，未來比賽用)
 
 # MMAudio(聲音生成模型）
