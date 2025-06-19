@@ -74,6 +74,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
    pip install -e .
    ```
    若出現 `setup.py not found` 錯誤，請先升級 pip：
+   
    ```bash
    pip install --upgrade pip
    ```
