@@ -1,3 +1,6 @@
+/*
+GameModeManager負責管理遊戲模式掛在GameModeManager上，跟他一起持續存在。
+*/
 using UnityEngine;
 
 public enum GameMode

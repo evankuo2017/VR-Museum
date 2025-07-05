@@ -1,3 +1,6 @@
+/*
+通用的載入場景腳本
+*/
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
