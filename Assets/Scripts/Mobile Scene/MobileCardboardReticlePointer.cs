@@ -59,6 +59,7 @@ public class MobileCardboardReticlePointer : MonoBehaviour
     // ------------------------------
     
     private InputAction touchAction;
+    private InputAction spaceKeyAction; // 新增：空白鍵輸入
 
     // 是否被Discription Controller鎖住點擊事件
     public bool clickLock = false;
@@ -69,12 +70,32 @@ public class MobileCardboardReticlePointer : MonoBehaviour
         touchAction = new InputAction(type: InputActionType.PassThrough, binding: "<Touchscreen>/touch*/press");
         touchAction.performed += OnTouchPerformed;
         touchAction.Enable();
+        
+        // 新增：空白鍵輸入
+        spaceKeyAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/space");
+        spaceKeyAction.performed += OnSpaceKeyPerformed;
+        spaceKeyAction.Enable();
     }
 
     private void OnDisable()
     {
         touchAction.performed -= OnTouchPerformed;
         touchAction.Disable();
+        
+        // 新增：清理空白鍵輸入
+        spaceKeyAction.performed -= OnSpaceKeyPerformed;
+        spaceKeyAction.Disable();
+    }
+    
+    // 新增：空白鍵事件回調
+    private void OnSpaceKeyPerformed(InputAction.CallbackContext context)
+    {
+        // 檢查是否有互動物件，以及是否正在播放點擊動畫，以及是否鎖住點擊事件
+        if (gazedAtObject == null || isAnimatingClick || clickLock)
+            return;
+        
+        // 觸發點擊動畫與 OnPointerClick 訊息
+        StartCoroutine(ClickAnimationAndSendMessage(gazedAtObject));
     }
     
     // 觸控事件回調：每當有觸控按壓時執行

@@ -21,13 +21,13 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 目前此專案只用了他提供的Player物件並參考相關腳本
 
 ## 新增畫作：
-1. Unity中如果要新增畫作，複製一個畫作物件，命名為[畫作名]，再複製隨便一個Video Player物件命名為Video Player[畫作簡稱]<Br>
-2. 將影片放到video資料夾<Br>
-3. 在Assets中create一個Render texture物件(VideoOutput物件)命名為VideoOutput[畫作簡稱]大小設為跟畫作等比例(比原本大即可)<Br>
+1. Unity中如果要新增畫作，複製一個畫作物件，命名為[畫作名]<Br>
+2. 將影片放到Assets/Resources/video資料夾，圖片放到Assets/Resources/image<Br>
+3. 在Assets/Resources/video中create一個Render texture物件(VideoOutput物件)命名為VideoOutput[畫作簡稱]大小設為跟畫作等比例(比原本大即可)<Br>
 4. 將他的VideoOutput物件及畫作品影片放到Video Player物件中<Br>
-5. 將Video Player物件放到畫作物件的video中<Br>
+5. 將畫作圖片放到image物件中<Br>
 6. VideoOutput也要放入video的Raw Image中<Br>
-7. 最後調整畫作物件的video及其碰撞箱大小，以及frame的大小<Br>
+7. 最後調整畫作物件的video、image大小(必須一樣大)及其碰撞箱大小，以及frame的大小<Br>
 8. 將畫作的Discription放到合適的位置並放上對應的文字<Br>
 9. 將整個畫作物件放到你要的位置<Br>
 
@@ -35,6 +35,7 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 1. 雖然遊戲有兩個模式(手機、VR)但本專案的遊戲主場景只有一個，即Game Scene，會根據Menu場景的選擇來挑選遊戲格式，啟用對應按鈕及遊戲運作模式<Br>
 2. 如果unity中測試畫面(渲染)跟手機畫面不太一樣很正常<Br>
 3. 每個場景都可能會有2D部分跟3D部分，2D部分就是放在Canvas物件中的元素會直接顯示在使用者遊玩的畫面上，3D部分則是使用者看到的場景<Br>
+4. Game Scene採用動態的方式載入影片內容以避免未來持續擴充造成的當機問題
 
 ## 未來進度(元智大展估計九月前必須完成)
 1. 持續新增畫作與擴建美術館(九月至少要擴增到總數15幅，為元智大展做準備)

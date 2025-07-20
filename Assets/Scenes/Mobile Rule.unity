@@ -1851,11 +1851,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 832701372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a4166df3731f146b93e42b79c1ad18, type: 3}
+  m_Script: {fileID: 11500000, guid: ef0fb93f403cad145973d57d8b171e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayers:
-  - {fileID: 285775910}
+  videoPlayers: []
   loadingPanel: {fileID: 44272302}
   progressBar: {fileID: 658615779}
   minLoadingTime: 1

@@ -2069,8 +2069,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1498534190}
   - component: {fileID: 1498534189}
-  - component: {fileID: 1498534192}
   - component: {fileID: 1498534193}
+  - component: {fileID: 1498534194}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2108,24 +2108,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1498534192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498534187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a4166df3731f146b93e42b79c1ad18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoPlayers:
-  - {fileID: 614283081}
-  loadingPanel: {fileID: 1765078376}
-  progressBar: {fileID: 1531151192}
-  minLoadingTime: 1
-  videoPrepareTimeout: 5
 --- !u!114 &1498534193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2157,6 +2139,23 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &1498534194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498534187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0fb93f403cad145973d57d8b171e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayers: []
+  loadingPanel: {fileID: 1765078376}
+  progressBar: {fileID: 1531151192}
+  minLoadingTime: 1
+  videoPrepareTimeout: 5
 --- !u!1 &1531151190
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,12 @@
 /*
-    持續等待直到所有影片都準備好就把loading bar關掉
+    Menu及Rule頁面使用，持續等待直到所有影片都準備好就把loading bar關掉
 */
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class VideoPreparationController : MonoBehaviour
+public class NormalVideoPreparationController : MonoBehaviour
 {
     // 多個影片播放元件，可在 Inspector 中指定
     public VideoPlayer[] videoPlayers;

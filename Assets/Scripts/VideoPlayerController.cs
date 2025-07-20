@@ -1,77 +1,151 @@
 /*
-    於遊戲場景中控制影片撥放與停止時機
+    於遊戲場景中控制每影片的載入、卸載、撥放與停止時機
 */
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using System.Collections;
 
 public class VideoPlayerController : MonoBehaviour
 {
     [Header("reference objects")]
-    [SerializeField] private RawImage displayImage;
+    [SerializeField] private RawImage displayImage;// 影片顯示區域
     [SerializeField] private VideoPlayer videoPlayer;
-    
-    
+    [SerializeField] private RawImage previewImage;// 畫作靜態圖
+
+    [Header("影片設定")]
+    [SerializeField] private string videoPath; // 影片在Resources資料夾中的路徑，例如："Videos/MyVideo"
+
+    private bool isVideoLoaded = false;
+    private bool isVideoPrepared = false;
+    private bool isPlaying = false;
+
     private void Start()
     {
         InitializeComponents();
+        // 如果沒有設定videoPath，嘗試從VideoPlayer的clip獲取
+        if (string.IsNullOrEmpty(videoPath) && videoPlayer != null && videoPlayer.clip != null)
+        {
+            videoPath = videoPlayer.clip.name;
+            Debug.Log($"[{gameObject.name}] 自動設定影片路徑: {videoPath}");
+        }
     }
 
     private void InitializeComponents()
     {
         if (videoPlayer != null)
         {
-            // 設置基本屬性
             videoPlayer.playOnAwake = false;
             videoPlayer.waitForFirstFrame = true;
             videoPlayer.loopPointReached += OnVideoFinished;
-            
-            // 準備視頻
-            videoPlayer.Prepare();
             videoPlayer.prepareCompleted += OnVideoPrepared;
+        }
+    }
 
+    // 動態初始化影片
+    public void InitializeVideo()
+    {
+        if (isVideoLoaded || videoPlayer == null) return;
+        
+        // 如果videoPlayer.clip為null，嘗試重新載入
+        if (videoPlayer.clip == null && !string.IsNullOrEmpty(videoPath))
+        {
+            Debug.Log($"[{gameObject.name}] 嘗試動態載入影片: {videoPath}");
+            
+            VideoClip clip = null;
+            
+            clip = Resources.Load<VideoClip>($"video/{videoPath}");
+            
+            if (clip != null)
+            {
+                videoPlayer.clip = clip;
+                Debug.Log($"[{gameObject.name}] 成功載入影片: {clip.name}");
+            }
+            else
+            {
+                Debug.LogError($"[{gameObject.name}] 無法載入影片: {videoPath}");
+                return;
+            }
+        }
+        
+        string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
+        Debug.Log($"[{gameObject.name}] 開始載入影片: {videoName}");
+        isVideoLoaded = true;
+        videoPlayer.Prepare();
+        if (previewImage != null) 
+        {
+            previewImage.gameObject.SetActive(false);
+            Debug.Log($"[{gameObject.name}] 已隱藏預覽圖片");
+        }
+    }
+
+    // 動態卸載影片
+    public void UnloadVideo()
+    {
+        if (!isVideoLoaded || videoPlayer == null) return;
+        
+        // 先保存影片名稱，再清空clip
+        string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
+        Debug.Log($"[{gameObject.name}] 開始卸載影片: {videoName}");
+        
+        if (videoPlayer.isPlaying) videoPlayer.Stop();
+        
+        // 清空影片資源
+        videoPlayer.clip = null;
+        isVideoLoaded = false;
+        isVideoPrepared = false;
+        isPlaying = false;
+        
+        // 重新顯示image
+        if (previewImage != null) 
+        {
+            previewImage.gameObject.SetActive(true);
+            Debug.Log($"[{gameObject.name}] 已重新顯示預覽圖片");
         }
     }
 
     private void OnVideoPrepared(VideoPlayer vp)
     {
-        // 視頻準備完成時，設置第一幀
+        isVideoPrepared = true;
         vp.frame = 0;
         vp.Pause();
-        
-        if (displayImage != null)
-        {
-            displayImage.enabled = true;
-        }
-        
-        // 移除事件監聽
-        vp.prepareCompleted -= OnVideoPrepared;
+        if (displayImage != null) displayImage.enabled = true;
+        string videoName = vp.clip != null ? vp.clip.name : "未命名影片";
+        Debug.Log($"[{gameObject.name}] 影片準備完成: {videoName}");
     }
 
     private void OnVideoFinished(VideoPlayer vp)
     {
+        isPlaying = false;
         vp.frame = 0;
         vp.Pause();
-        displayImage.enabled = true;
+        if (displayImage != null) displayImage.enabled = true;
+        string videoName = vp.clip != null ? vp.clip.name : "未命名影片";
+        Debug.Log($"[{gameObject.name}] 影片播放結束: {videoName}");
     }
-    
+
     private void ShowAndPlayVideo()
     {
-        if (displayImage != null)
-        {
-            displayImage.enabled = true;
-        }
-
+        if (displayImage != null) displayImage.enabled = true;
         if (videoPlayer != null)
         {
             if (videoPlayer.isPlaying)
             {
                 videoPlayer.Pause();
+                isPlaying = false;
+                string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
+                Debug.Log($"[{gameObject.name}] 暫停播放影片: {videoName}");
+            }
+            else if (isVideoPrepared)
+            {
+                videoPlayer.Play();
+                isPlaying = true;
+                string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
+                Debug.Log($"[{gameObject.name}] 開始播放影片: {videoName}");
             }
             else
             {
-                // 如果是暫停狀態，從當前幀繼續播放
-                videoPlayer.Play();
+                Debug.Log($"[{gameObject.name}] 影片尚未準備完成，無法播放");
             }
         }
     }
@@ -80,30 +154,29 @@ public class VideoPlayerController : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.Pause();  // 使用 Pause 而不是 Stop
+            videoPlayer.Pause();
             videoPlayer.frame = 0;
+            isPlaying = false;
+            string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
+            Debug.Log($"[{gameObject.name}] 停止並隱藏影片: {videoName}");
         }
-        
-        if (displayImage != null)
-        {
-            displayImage.enabled = true;
-        }
+        if (displayImage != null) displayImage.enabled = true;
     }
 
     public void OnPointerEnter()
     {
-        Debug.Log("OnPointerEnter");
+        Debug.Log($"[{gameObject.name}] OnPointerEnter");
     }
 
     public void OnPointerClick()
     {
-        Debug.Log("OnPointerClick");
+        Debug.Log($"[{gameObject.name}] OnPointerClick");
         ShowAndPlayVideo();
     }
 
     public void OnPointerExit()
     {
-        Debug.Log("OnPointerExit");
+        Debug.Log($"[{gameObject.name}] OnPointerExit");
         StopAndHide();
     }
 }
