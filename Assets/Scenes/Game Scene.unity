@@ -197,6 +197,7 @@ MonoBehaviour:
   displayImage: {fileID: 4659009}
   videoPlayer: {fileID: 1831545586}
   previewImage: {fileID: 1208041692}
+  videoPath: 
 --- !u!114 &4659009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +496,7 @@ MonoBehaviour:
   displayImage: {fileID: 24236585}
   videoPlayer: {fileID: 1654283038}
   previewImage: {fileID: 1647392662}
+  videoPath: 
 --- !u!114 &24236585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3091,6 +3093,7 @@ MonoBehaviour:
   displayImage: {fileID: 259715467}
   videoPlayer: {fileID: 1596248805}
   previewImage: {fileID: 552905951}
+  videoPath: 
 --- !u!114 &259715467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3609,6 +3612,7 @@ MonoBehaviour:
   displayImage: {fileID: 310645855}
   videoPlayer: {fileID: 1108383820}
   previewImage: {fileID: 1628246685}
+  videoPath: 
 --- !u!114 &310645855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6448,6 +6452,7 @@ MonoBehaviour:
   displayImage: {fileID: 565591205}
   videoPlayer: {fileID: 319159708}
   previewImage: {fileID: 1182554216}
+  videoPath: 
 --- !u!114 &565591205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6893,6 +6898,7 @@ MonoBehaviour:
   displayImage: {fileID: 592196166}
   videoPlayer: {fileID: 942507475}
   previewImage: {fileID: 1828085951}
+  videoPath: 
 --- !u!65 &592196170
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11645,6 +11651,7 @@ MonoBehaviour:
   displayImage: {fileID: 1031724350}
   videoPlayer: {fileID: 2114241079}
   previewImage: {fileID: 290722838}
+  videoPath: 
 --- !u!114 &1031724350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12732,6 +12739,7 @@ MonoBehaviour:
   displayImage: {fileID: 1144563096}
   videoPlayer: {fileID: 202606519}
   previewImage: {fileID: 1408516941}
+  videoPath: 
 --- !u!114 &1144563096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13333,6 +13341,7 @@ MonoBehaviour:
   displayImage: {fileID: 1160840079}
   videoPlayer: {fileID: 1732840374}
   previewImage: {fileID: 1505761678}
+  videoPath: 
 --- !u!114 &1160840079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14453,6 +14462,7 @@ MonoBehaviour:
   displayImage: {fileID: 1211299195}
   videoPlayer: {fileID: 1700379817}
   previewImage: {fileID: 1705838309}
+  videoPath: 
 --- !u!114 &1211299195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16138,6 +16148,7 @@ MonoBehaviour:
   displayImage: {fileID: 1370639144}
   videoPlayer: {fileID: 1935628764}
   previewImage: {fileID: 1768010499}
+  videoPath: 
 --- !u!114 &1370639144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17725,6 +17736,7 @@ MonoBehaviour:
   displayImage: {fileID: 1468902460}
   videoPlayer: {fileID: 902135572}
   previewImage: {fileID: 1813676626}
+  videoPath: 
 --- !u!114 &1468902460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21188,6 +21200,7 @@ MonoBehaviour:
   displayImage: {fileID: 1747102152}
   videoPlayer: {fileID: 316464260}
   previewImage: {fileID: 1155503455}
+  videoPath: 
 --- !u!114 &1747102152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22930,6 +22943,7 @@ MonoBehaviour:
   displayImage: {fileID: 1831121938}
   videoPlayer: {fileID: 189176615}
   previewImage: {fileID: 407133540}
+  videoPath: 
 --- !u!114 &1831121938
 MonoBehaviour:
   m_ObjectHideFlags: 0

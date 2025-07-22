@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "com.google.xr.cardboard": "https://github.com/googlevr/cardboard-xr-plugin.git",
-    "com.htc.upm.vive.openxr": "https://github.com/ViveSoftware/VIVE-OpenXR.git?path=com.htc.upm.vive.openxr",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.muse.chat": "1.1.1-pre.3",
