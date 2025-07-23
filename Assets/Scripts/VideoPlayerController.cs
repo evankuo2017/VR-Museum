@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using System.Collections;
+using UnityEngine.EventSystems; // 引入事件系統命名空間
 
 public class VideoPlayerController : MonoBehaviour
 {
@@ -67,16 +68,8 @@ public class VideoPlayerController : MonoBehaviour
                 return;
             }
         }
-        
-        string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
-        Debug.Log($"[{gameObject.name}] 開始載入影片: {videoName}");
         isVideoLoaded = true;
         videoPlayer.Prepare();
-        if (previewImage != null) 
-        {
-            previewImage.gameObject.SetActive(false);
-            Debug.Log($"[{gameObject.name}] 已隱藏預覽圖片");
-        }
     }
 
     // 動態卸載影片
@@ -84,11 +77,9 @@ public class VideoPlayerController : MonoBehaviour
     {
         if (!isVideoLoaded || videoPlayer == null) return;
         
-        // 先保存影片名稱，再清空clip
-        string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
-        Debug.Log($"[{gameObject.name}] 開始卸載影片: {videoName}");
-        
         if (videoPlayer.isPlaying) videoPlayer.Stop();
+        
+        Debug.Log($"[{gameObject.name}] 開始卸載影片: {videoPlayer.clip.name}");
         
         // 清空影片資源
         videoPlayer.clip = null;
@@ -110,6 +101,7 @@ public class VideoPlayerController : MonoBehaviour
         vp.frame = 0;
         vp.Pause();
         if (displayImage != null) displayImage.enabled = true;
+        
         string videoName = vp.clip != null ? vp.clip.name : "未命名影片";
         Debug.Log($"[{gameObject.name}] 影片準備完成: {videoName}");
     }
@@ -163,17 +155,27 @@ public class VideoPlayerController : MonoBehaviour
         if (displayImage != null) displayImage.enabled = true;
     }
 
+    // 滑鼠/觸控進入時觸發
     public void OnPointerEnter()
     {
         Debug.Log($"[{gameObject.name}] OnPointerEnter");
     }
 
+    // 滑鼠/觸控點擊時觸發
     public void OnPointerClick()
     {
         Debug.Log($"[{gameObject.name}] OnPointerClick");
+        // 點擊時第一步就隱藏預覽圖，避免黑屏
+        // Hide preview image immediately on click to avoid black screen
+        if (previewImage != null)
+        {
+            previewImage.gameObject.SetActive(false);
+            Debug.Log($"[{gameObject.name}] 點擊時隱藏預覽圖片");
+        }
         ShowAndPlayVideo();
     }
 
+    // 滑鼠/觸控離開時觸發
     public void OnPointerExit()
     {
         Debug.Log($"[{gameObject.name}] OnPointerExit");

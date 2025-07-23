@@ -47,44 +47,16 @@ public class DynamicVideoPreparationController : MonoBehaviour
         }
         // 尋找 VrModeController
         vrModeController = FindObjectOfType<VrModeController>();
-
-        // 啟動loading bar
+        // 顯示 loading bar，僅作為過場效果，不做任何影片載入
         if (loadingPanel != null) loadingPanel.SetActive(true);
         if (progressBar != null) progressBar.value = 0f;
-        StartCoroutine(LoadingBar());
+        StartCoroutine(LoadingBarOnlyEffect());
     }
 
-    private IEnumerator LoadingBar()
+    // 只顯示 loading bar 最少秒數，不做任何影片載入/卸載
+    private IEnumerator LoadingBarOnlyEffect()
     {
         float elapsed = 0f;
-        
-        // 第一階段：預先載入所有影片（佔用loading bar的70%時間）
-        float preloadTime = minLoadingTime * 0.7f;
-        Debug.Log("開始預先載入所有影片...");
-        
-        while (elapsed < preloadTime)
-        {
-            elapsed += Time.deltaTime;
-            if (progressBar != null)
-                progressBar.value = Mathf.Clamp01(elapsed / minLoadingTime);
-            yield return null;
-        }
-        
-        // 預先載入所有影片
-        foreach (var info in artworkInfos)
-        {
-            Debug.Log($"[{info.artwork.name}] 預先載入影片");
-            info.controller.InitializeVideo();
-            yield return new WaitForSeconds(0.1f); // 稍微延遲，避免同時載入太多影片
-        }
-        
-        // 等待所有影片準備完成
-        yield return new WaitForSeconds(0.5f);
-        
-        // 第二階段：卸載所有影片（佔用loading bar的30%時間）
-        float unloadTime = minLoadingTime * 0.3f;
-        Debug.Log("開始卸載所有影片...");
-        
         while (elapsed < minLoadingTime)
         {
             elapsed += Time.deltaTime;
@@ -92,21 +64,10 @@ public class DynamicVideoPreparationController : MonoBehaviour
                 progressBar.value = Mathf.Clamp01(elapsed / minLoadingTime);
             yield return null;
         }
-        
-        // 卸載所有影片
-        foreach (var info in artworkInfos)
-        {
-            Debug.Log($"[{info.artwork.name}] 卸載影片");
-            info.controller.UnloadVideo();
-        }
-        
         if (loadingPanel != null) loadingPanel.SetActive(false);
         if (progressBar != null) progressBar.gameObject.SetActive(false);
         loadingDone = true;
-
-        Debug.Log("Loading完成，所有影片已預先載入並卸載");
-
-        // loading結束後才通知進入VR
+        // loading bar 結束後才通知進入VR
         if (vrModeController != null)
         {
             vrModeController.RequestEnterVR();
