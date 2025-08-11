@@ -25,6 +25,13 @@ public class SwapModeManager : MonoBehaviour
     // 將 Joystick 改為 GameObject 以整個物件做啟用/停用
     public GameObject fixedJoystickObject;
 
+    [Header("Player 物件（僅在對應模式啟用）")]
+    public GameObject vrPlayerRoot;      // VR 模式的 Player/XR Rig 物件（只在 VR 開啟）
+    public GameObject mobilePlayerRoot;  // Mobile 模式的 Player 物件（只在 Mobile 開啟）
+
+    [Header("EventSystem（僅 Mobile 模式啟用）")]
+    public GameObject mobileEventSystem; // 僅在 Mobile 模式下啟用的 EventSystem（避免與 XR 的 EventSystem 衝突）
+
     // 一定要用Awake!因為要趕在上述這些物件的腳本執行start前把他們disable
     private void Awake()
     {
@@ -44,6 +51,11 @@ public class SwapModeManager : MonoBehaviour
                 if (vrReticlePointer != null) vrReticlePointer.enabled = true;
                 if (reverse != null) reverse.gameObject.SetActive(true);
                 if (mask != null) mask.gameObject.SetActive(true);
+                // 啟用 VR 專用 Player，關閉 Mobile 專用 Player
+                if (vrPlayerRoot != null) vrPlayerRoot.SetActive(true);
+                if (mobilePlayerRoot != null) mobilePlayerRoot.SetActive(false);
+                // 關閉只在 Mobile 模式啟用的 EventSystem
+                if (mobileEventSystem != null) mobileEventSystem.SetActive(false);
 
                 if (mobileController != null) mobileController.enabled = false;
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = false;
@@ -64,6 +76,11 @@ public class SwapModeManager : MonoBehaviour
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = true;
                 if (BackToMenu != null) BackToMenu.gameObject.SetActive(true);
                 if (fixedJoystickObject != null) fixedJoystickObject.SetActive(true);
+                // 啟用 Mobile 專用 Player，關閉 VR 專用 Player
+                if (vrPlayerRoot != null) vrPlayerRoot.SetActive(false);
+                if (mobilePlayerRoot != null) mobilePlayerRoot.SetActive(true);
+                // 啟用只在 Mobile 模式啟用的 EventSystem
+                if (mobileEventSystem != null) mobileEventSystem.SetActive(true);
 
                 // Mobile模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 Inactive layer
                 SetDescriptionsLayer(interactiveLayer);

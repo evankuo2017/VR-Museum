@@ -16,8 +16,8 @@ EditorBuildSettings:
     guid: deb4f849c042f7d48a72744b46478387
   - enabled: 1
     path: Assets/Scenes/Game Scene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+    guid: 297ac69e2541fb74e98c6e6e68371327
+  - enabled: 0
     path: Assets/Scenes/VR Rule.unity
     guid: e3da57b069a2f1149b97e75770bc5d58
   - enabled: 1
@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Information.unity
     guid: 977d07a9c42312b45ade10dec977ebc4
+  - enabled: 0
+    path: Assets/Samples/XR Interaction Toolkit/2.6.3/Starter Assets/DemoScene.unity
+    guid: 319dafa5c80f29f428dc1e0d03f04177
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 76f185b6030afd2468930019ed17aa8d, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 2aa3601acf68cf145b017d15fae349ad, type: 2}
