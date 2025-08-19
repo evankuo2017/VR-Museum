@@ -1,5 +1,5 @@
 /*
-用於啟動與關閉不同模式該在Game Scene使用的物件
+用於啟動與關閉不同模式該在Game Scene使用的物件以及Description功能
 */
 using UnityEngine;
 using UnityEngine.UI;  // 用於 Button 型別
@@ -7,35 +7,24 @@ using UnityEngine.SceneManagement; // 用於場景遍歷
 
 public class SwapModeManager : MonoBehaviour
 {
-    [Header("同一物件上的模式初始化腳本")]
-    public VrModeController vrController;          // 請在 Inspector 指定 VR 模式專用腳本
+    [Header("測試模式才會用的腳本")]
     public MobileModeController mobileController;  // 請在 Inspector 指定 Mobile 模式專用腳本
-
-    [Header("同一物件上的模式互動腳本")]
-    public CardboardReticlePointer vrReticlePointer;          // 請在 Inspector 指定 VR 模式專用腳本
     public MobileCardboardReticlePointer mobileReticlePointer; // 請在 Inspector 指定 Mobile 模式專用腳本
-
-    [Header("VR模式才會用的UI")]
-    public Button reverse;
-    public Image mask;
-
-    [Header("Mobile模式才會用的UI")]
-    public Button BackToMenu;
-    
-    // 將 Joystick 改為 GameObject 以整個物件做啟用/停用
-    public GameObject fixedJoystickObject;
+    [Header("測試模式才會用的UI")]
+    // 測試用的 Canvas 物件，包含按鈕和搖桿
+    public GameObject testCanvas;
 
     [Header("Player 物件（僅在對應模式啟用）")]
     public GameObject vrPlayerRoot;      // VR 模式的 Player/XR Rig 物件（只在 VR 開啟）
-    public GameObject mobilePlayerRoot;  // Mobile 模式的 Player 物件（只在 Mobile 開啟）
+    public GameObject testPlayerRoot;  // 測試模式的 Player 物件
 
     [Header("EventSystem（僅 Mobile 模式啟用）")]
-    public GameObject mobileEventSystem; // 僅在 Mobile 模式下啟用的 EventSystem（避免與 XR 的 EventSystem 衝突）
+    public GameObject testEventSystem; // 僅在測試模式下啟用的 EventSystem（避免與 XR 的 EventSystem 衝突）
 
     // 一定要用Awake!因為要趕在上述這些物件的腳本執行start前把他們disable
     private void Awake()
     {
-        Debug.LogWarning("Awake");
+        Debug.LogWarning("SwapModeManager Awake");
         // 確保 GameModeManager 存在
         if (GameModeManager.Instance != null)
         {
@@ -47,42 +36,35 @@ public class SwapModeManager : MonoBehaviour
 
             if (GameModeManager.Instance.CurrentMode == GameMode.VRMode)
             {
-                if (vrController != null) vrController.enabled = true;
-                if (vrReticlePointer != null) vrReticlePointer.enabled = true;
-                if (reverse != null) reverse.gameObject.SetActive(true);
-                if (mask != null) mask.gameObject.SetActive(true);
-                // 啟用 VR 專用 Player，關閉 Mobile 專用 Player
+                // 啟用 VR 專用 Player，關閉測試專用 Player
                 if (vrPlayerRoot != null) vrPlayerRoot.SetActive(true);
-                if (mobilePlayerRoot != null) mobilePlayerRoot.SetActive(false);
-                // 關閉只在 Mobile 模式啟用的 EventSystem
-                if (mobileEventSystem != null) mobileEventSystem.SetActive(false);
-
+                if (testPlayerRoot != null) testPlayerRoot.SetActive(false);
+                
                 if (mobileController != null) mobileController.enabled = false;
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = false;
-                if (BackToMenu != null) BackToMenu.gameObject.SetActive(false);
-                if (fixedJoystickObject != null) fixedJoystickObject.SetActive(false);
+                if (testCanvas != null) testCanvas.SetActive(false);
 
-                // VR模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 UI layer
-                SetDescriptionsLayer(uiLayer);
+                // 關閉只在測試模式啟用的 EventSystem
+                if (testEventSystem != null) testEventSystem.SetActive(false);
+
+                // VR模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 interactive layer
+                //SetDescriptionsLayer(uiLayer);
+                SetDescriptionsLayer(interactiveLayer);
             }
             else if (GameModeManager.Instance.CurrentMode == GameMode.MobileMode)
             {
-                if (vrController != null) vrController.enabled = false;
-                if (vrReticlePointer != null) vrReticlePointer.enabled = false;
-                if (reverse != null) reverse.gameObject.SetActive(false);
-                if (mask != null) mask.gameObject.SetActive(false);
+                // 啟用測試專用 Player，關閉 VR 專用 Player
+                if (vrPlayerRoot != null) vrPlayerRoot.SetActive(false);
+                if (testPlayerRoot != null) testPlayerRoot.SetActive(true);
 
                 if (mobileController != null) mobileController.enabled = true;
                 if (mobileReticlePointer != null) mobileReticlePointer.enabled = true;
-                if (BackToMenu != null) BackToMenu.gameObject.SetActive(true);
-                if (fixedJoystickObject != null) fixedJoystickObject.SetActive(true);
-                // 啟用 Mobile 專用 Player，關閉 VR 專用 Player
-                if (vrPlayerRoot != null) vrPlayerRoot.SetActive(false);
-                if (mobilePlayerRoot != null) mobilePlayerRoot.SetActive(true);
-                // 啟用只在 Mobile 模式啟用的 EventSystem
-                if (mobileEventSystem != null) mobileEventSystem.SetActive(true);
+                if (testCanvas != null) testCanvas.SetActive(true);
+                
+                // 啟用只在測試模式啟用的 EventSystem
+                if (testEventSystem != null) testEventSystem.SetActive(true);
 
-                // Mobile模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 Inactive layer
+                // 測試模式下，將場景中所有名稱為"Description"的物件與其子物件設置為 Inactive layer
                 SetDescriptionsLayer(interactiveLayer);
             }
         }
@@ -93,7 +75,7 @@ public class SwapModeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 遍歷當前場景所有物件，將名稱為"Description"的物件與其子物件設置為指定 layer
+    /// 遍歷當前場景所有物件，將名稱為"Description"的物件與其子物件設置為指定 layer(用以開關Description功能)
     /// </summary>
     /// <param name="layer">目標 layer 索引</param>
     private void SetDescriptionsLayer(int layer)
