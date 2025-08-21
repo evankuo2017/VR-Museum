@@ -10,8 +10,7 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 九月：直接clone此專案，沒學長允許不要push<Br>
 九月後：先fork此專案後clone，之後就幾乎都在fork上開發，等到需要上傳的時候才發pull request
 ## unity hub & Editor
-https://unity.com/releases/editor/whats-new/2022.3.56
-選Windows並下載，完成後下載Component installers的Android Build support
+下載unity hub，然後在unity hub下載2022.3.56f1版本的editor，記得選Android support
 ## 使用的插件
 ### Museum Interior (付費，可登入實驗室帳號後下載)
 裡面有很多美術館用的到的材質跟物件
