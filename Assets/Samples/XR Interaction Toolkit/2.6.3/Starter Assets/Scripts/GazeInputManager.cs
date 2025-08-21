@@ -32,12 +32,15 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// </summary>
         protected void Awake()
         {
+            Debug.LogWarning("[GazeInputManager] Awake - 開始執行");
+            
             // Check if we have eye tracking support
             var inputDeviceList = new List<InputDevice>();
             InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.EyeTracking, inputDeviceList);
             if (inputDeviceList.Count > 0)
             {
                 Debug.Log("Eye tracking device found!", this);
+                Debug.LogWarning("[GazeInputManager] 找到眼球追蹤設備");
                 m_EyeTrackingDeviceFound = true;
                 return;
             }
@@ -58,6 +61,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             InputSystem.InputSystem.onDeviceChange += OnDeviceChange;
 
             gameObject.SetActive(m_FallbackIfEyeTrackingUnavailable);
+            Debug.LogWarning("[GazeInputManager] Awake - 完成");
         }
 
         /// <summary>

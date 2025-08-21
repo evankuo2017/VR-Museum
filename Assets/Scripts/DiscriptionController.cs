@@ -18,6 +18,8 @@ public class DiscriptionController : MonoBehaviour
 
     private void Awake()
     {
+        Debug.LogWarning("[DiscriptionController] Awake - 開始執行");
+        
         // 使用 Resources.FindObjectsOfTypeAll 可以搜尋到 inactive 狀態的 GameObject
         targetImage = Resources.FindObjectsOfTypeAll<GameObject>()
             .FirstOrDefault(go => go.name == "Discription Window");
@@ -40,6 +42,8 @@ public class DiscriptionController : MonoBehaviour
         {
             Debug.LogWarning("找不到名稱為 'Discribe Title' 的 TMP_Text 元件");
         }
+        
+        Debug.LogWarning("[DiscriptionController] Awake - 完成");
     }
 
     public void OnPointerClick()

@@ -23,6 +23,8 @@ public class VideoPlayerController : MonoBehaviour
 
     private void Start()
     {
+        Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] Start - 開始執行");
+        
         InitializeComponents();
         // 如果沒有設定videoPath，嘗試從VideoPlayer的clip獲取
         if (string.IsNullOrEmpty(videoPath) && videoPlayer != null && videoPlayer.clip != null)
@@ -30,68 +32,115 @@ public class VideoPlayerController : MonoBehaviour
             videoPath = videoPlayer.clip.name;
             Debug.Log($"[{gameObject.name}] 自動設定影片路徑: {videoPath}");
         }
+        
+        Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] Start - 完成");
     }
 
     private void InitializeComponents()
     {
+        Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] InitializeComponents - 開始");
+        
         if (videoPlayer != null)
         {
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 設定 VideoPlayer 參數");
             videoPlayer.playOnAwake = false;
             videoPlayer.waitForFirstFrame = true;
             videoPlayer.loopPointReached += OnVideoFinished;
             videoPlayer.prepareCompleted += OnVideoPrepared;
         }
+        else
+        {
+            Debug.LogError($"[VideoPlayerController] [{gameObject.name}] VideoPlayer 為 null！");
+        }
+        
+        Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] InitializeComponents - 完成");
     }
 
     // 動態初始化影片
     public void InitializeVideo()
     {
-        if (isVideoLoaded || videoPlayer == null) return;
+        Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] InitializeVideo - 開始");
         
-        // 如果videoPlayer.clip為null，嘗試重新載入
-        if (videoPlayer.clip == null && !string.IsNullOrEmpty(videoPath))
+        if (isVideoLoaded || videoPlayer == null) 
         {
-            Debug.Log($"[{gameObject.name}] 嘗試動態載入影片: {videoPath}");
-            
-            VideoClip clip = null;
-            
-            clip = Resources.Load<VideoClip>($"video/{videoPath}");
-            
-            if (clip != null)
-            {
-                videoPlayer.clip = clip;
-                Debug.Log($"[{gameObject.name}] 成功載入影片: {clip.name}");
-            }
-            else
-            {
-                Debug.LogError($"[{gameObject.name}] 無法載入影片: {videoPath}");
-                return;
-            }
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] InitializeVideo 跳過 - isVideoLoaded:{isVideoLoaded}, videoPlayer:{videoPlayer != null}");
+            return;
         }
-        isVideoLoaded = true;
-        videoPlayer.Prepare();
+        
+        try
+        {
+            // 如果videoPlayer.clip為null，嘗試重新載入
+            if (videoPlayer.clip == null && !string.IsNullOrEmpty(videoPath))
+            {
+                Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 嘗試動態載入影片: {videoPath}");
+                
+                VideoClip clip = null;
+                
+                clip = Resources.Load<VideoClip>($"video/{videoPath}");
+                
+                if (clip != null)
+                {
+                    videoPlayer.clip = clip;
+                    Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 成功載入影片: {clip.name}");
+                }
+                else
+                {
+                    Debug.LogError($"[VideoPlayerController] [{gameObject.name}] 無法載入影片: {videoPath}");
+                    return;
+                }
+            }
+            
+            isVideoLoaded = true;
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 開始 Prepare 影片");
+            videoPlayer.Prepare();
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] InitializeVideo - 完成");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[VideoPlayerController] [{gameObject.name}] InitializeVideo 發生錯誤: {e.Message}\n{e.StackTrace}");
+        }
     }
 
     // 動態卸載影片
     public void UnloadVideo()
     {
-        if (!isVideoLoaded || videoPlayer == null) return;
+        Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] UnloadVideo - 開始");
         
-        if (videoPlayer.isPlaying) videoPlayer.Stop();
-        
-        Debug.Log($"[{gameObject.name}] 開始卸載影片: {videoPlayer.clip.name}");
-        
-        // 清空影片資源
-        videoPlayer.clip = null;
-        isVideoLoaded = false;
-        isVideoPrepared = false;
-        isPlaying = false;
-        
-        // 重新顯示image
-        if (previewImage != null) 
+        if (!isVideoLoaded || videoPlayer == null) 
         {
-            previewImage.gameObject.SetActive(true);
-            Debug.Log($"[{gameObject.name}] 已重新顯示預覽圖片");
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] UnloadVideo 跳過 - isVideoLoaded:{isVideoLoaded}, videoPlayer:{videoPlayer != null}");
+            return;
+        }
+        
+        try
+        {
+            if (videoPlayer.isPlaying) 
+            {
+                Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 停止正在播放的影片");
+                videoPlayer.Stop();
+            }
+            
+            string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未知影片";
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 開始卸載影片: {videoName}");
+            
+            // 清空影片資源
+            videoPlayer.clip = null;
+            isVideoLoaded = false;
+            isVideoPrepared = false;
+            isPlaying = false;
+            
+            // 重新顯示image
+            if (previewImage != null) 
+            {
+                previewImage.gameObject.SetActive(true);
+                Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] 已重新顯示預覽圖片");
+            }
+            
+            Debug.LogWarning($"[VideoPlayerController] [{gameObject.name}] UnloadVideo - 完成");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[VideoPlayerController] [{gameObject.name}] UnloadVideo 發生錯誤: {e.Message}\n{e.StackTrace}");
         }
     }
 

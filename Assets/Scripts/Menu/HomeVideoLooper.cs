@@ -15,17 +15,29 @@ public class HomeVideoLooper : MonoBehaviour
 
     void Awake()
     {
+        Debug.LogWarning("[HomeVideoLooper] Awake - 開始執行");
+        
         videoPlayer = GetComponent<VideoPlayer>();
 
-        // 確保 VideoPlayer 不會自動 Loop，改由自己控制
-        videoPlayer.isLooping = false;
+        if (videoPlayer != null)
+        {
+            Debug.LogWarning("[HomeVideoLooper] 設定影片播放器");
+            // 確保 VideoPlayer 不會自動 Loop，改由自己控制
+            videoPlayer.isLooping = false;
 
-        // 等待影片準備好後播放
-        videoPlayer.prepareCompleted += OnVideoPrepared;
-        videoPlayer.loopPointReached += OnVideoEnd;
+            // 等待影片準備好後播放
+            videoPlayer.prepareCompleted += OnVideoPrepared;
+            videoPlayer.loopPointReached += OnVideoEnd;
 
-        // 預先載入影片
-        videoPlayer.Prepare();
+            // 預先載入影片
+            videoPlayer.Prepare();
+        }
+        else
+        {
+            Debug.LogWarning("[HomeVideoLooper] VideoPlayer 組件未找到！");
+        }
+        
+        Debug.LogWarning("[HomeVideoLooper] Awake - 完成");
     }
 
     private void OnVideoPrepared(VideoPlayer vp)
