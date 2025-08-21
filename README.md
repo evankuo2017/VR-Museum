@@ -7,9 +7,11 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 
 # Unity開發app(即此git hub專案)
 ## 安裝
-九月：直接clone此專案，沒學長允許不要push
+九月：直接clone此專案，沒學長允許不要push<Br>
 九月後：先fork此專案後clone，之後就幾乎都在fork上開發，等到需要上傳的時候才發pull request
-
+## unity hub & Editor
+https://unity.com/releases/editor/whats-new/2022.3.56
+選Windows並下載，完成後下載Component installers的Android Build support
 ## 使用的插件
 ### Museum Interior (付費，可登入實驗室帳號後下載)
 裡面有很多美術館用的到的材質跟物件
@@ -36,7 +38,7 @@ Cilab與曹松清畫家合作的手機端的VR美術館，可上架到ios、andr
 4. Game Scene採用動態的方式載入影片內容以避免未來持續擴充造成的當機問題
 
 ## 未來進度(元智大展估計九月前必須完成)
-1. 元智大展將推翻舊有cardboard VＲ模式，有真正的VR眼鏡VIVE的Branch(這才是元智大展真的要上的code)，但在手機板仍須同步持續新增畫作與擴建美術館(九月至少要擴增到總數15幅，為元智大展做準備)
+1. 元智大展將推翻舊有cardboard VＲ模式，有真正的VR眼鏡VIVE的Branch(這才是元智大展真的要上的code)，但在手機板仍須同步持續新增畫作與擴建美術館(九月至少要擴增到總數15幅，為元智大展做準備)<Br>
 2. 目前安卓部分僅上架到github page，這很不方便使用者更新，也不適合未來維護，未來安卓部分請上架到Play Store
 
 # 影片生成：
