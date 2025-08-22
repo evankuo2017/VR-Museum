@@ -12,6 +12,9 @@ Cilab與曹松清畫家合作的VR端的VR美術館，使用HTC VIVE FOCUS3遊�
 九月：直接clone此專案，沒學長允許不要push
 九月後：先fork此專案後clone，之後就幾乎都在fork上開發，等到需要上傳的時候才發pull request
 
+## unity hub & Editor
+下載unity hub，然後在unity hub下載2022.3.56f1版本的editor，記得選Android support
+
 ## 新增畫作：
 理論上同app的方式
 

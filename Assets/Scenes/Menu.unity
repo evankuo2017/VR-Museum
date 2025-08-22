@@ -1112,6 +1112,7 @@ GameObject:
   - component: {fileID: 629368634}
   - component: {fileID: 629368633}
   - component: {fileID: 629368636}
+  - component: {fileID: 629368637}
   m_Layer: 5
   m_Name: info
   m_TagString: Untagged
@@ -1245,6 +1246,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8259a5779a42842bca4ab11b94a063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &629368637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629368631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b3638c2f5db5b479ff24c2859713d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PokeFollowTransform: {fileID: 629368632}
+  m_SmoothingSpeed: 16
+  m_ReturnToInitialPosition: 1
+  m_ApplyIfChildIsTarget: 1
+  m_ClampToMaxDistance: 1
+  m_MaxDistance: 20
 --- !u!1 &752047568
 GameObject:
   m_ObjectHideFlags: 0
