@@ -15,18 +15,14 @@ Cilab與曹松清畫家合作的VR端的VR美術館，使用HTC VIVE FOCUS3遊�
 ## unity hub & Editor
 下載unity hub，然後在unity hub下載2022.3.56f1版本的editor，記得選Android support
 
-## 新增畫作：
-理論上同app的方式
-
-## 關於遊戲場景
-雖然遊戲有兩個模式(手機、VR)，但是手機模式在這邊是測試模式會把Test Player打開原本關掉
-
 ## 測試遊戲
-請把場景中的TestPlayer設為Paintings物件中腳本的玩家，然後再做測試
-測試請從Menu場景開始，然後會可以跟app的手機模式用一樣的方式測試(搖桿移動，到scene手動旋轉player空白鍵觸發畫作)
+使用ADB+unity editor build and run
 
-## 未來進度
-布展前須完工，能夠正常玩然後介面盡量好看
+## 九月布展前必須完成
+修復互動距離與影片載入距離導致的效能+動畫顯示問題<Br>
+如果在互動距離縮短的情況下應該要讓遊戲畫面有更好的提示使使用者知道要靠畫作近一些<Br>
+使用說明頁換成VR版本的<Br>
+製作紙本使用說明以及工作人員用的VR眼鏡使用說明以及VR投影說明<Br>
 清理Dirty code，等候未來畫家或老師發落(新增畫作/加入LLM/手勢互動)
 
 # 影片生成：

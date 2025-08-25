@@ -13,7 +13,7 @@ public class DynamicVideoPreparationController : MonoBehaviour
     [Header("玩家Transform")]
     public Transform playerTransform;      // 玩家
     [Header("載入距離")]
-    public float loadDistance = 35f;
+    public float loadDistance = 40f;
 
     [Header("Loading Bar")]
     public GameObject loadingPanel;
