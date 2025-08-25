@@ -123,6 +123,7 @@ public class VideoPlayerController : MonoBehaviour
             if (videoPlayer.isPlaying) 
             {
                 Debug.Log($"[VideoPlayerController] [{debugObjectName}] 停止正在播放的影片");
+                StopAndHide();
                 videoPlayer.Stop();
             }
             

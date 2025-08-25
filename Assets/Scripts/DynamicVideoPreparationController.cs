@@ -11,10 +11,9 @@ public class DynamicVideoPreparationController : MonoBehaviour
     [Header("畫作物件（請手動掛載）")]
     public List<GameObject> artworks;
     [Header("玩家Transform")]
-    public Transform vrPlayerTransform;      // VR模式玩家
-    public Transform testPlayerTransform;    // 測試模式玩家
+    public Transform playerTransform;      // 玩家
     [Header("載入距離")]
-    public float loadDistance = 20f;
+    public float loadDistance = 35f;
 
     [Header("Loading Bar")]
     public GameObject loadingPanel;
@@ -28,10 +27,6 @@ public class DynamicVideoPreparationController : MonoBehaviour
     private void Start()
     {
         Debug.Log("[DynamicVideoPreparationController] Start - 開始執行");
-        
-        // 根據當前模式設定使用的玩家Transform
-        Debug.Log("[DynamicVideoPreparationController] 開始更新當前玩家");
-        UpdateCurrentPlayer();
         
         // 準備畫作資訊
         Debug.Log($"[DynamicVideoPreparationController] 開始準備 {artworks.Count} 個畫作資訊");
@@ -93,16 +88,16 @@ public class DynamicVideoPreparationController : MonoBehaviour
         // 減少 Update 中的 log 頻率，只在第一次執行時記錄
         if (Time.frameCount % 300 == 0) // 每 300 幀記錄一次狀態
         {
-            Debug.Log($"[DynamicVideoPreparationController] Update 狀態檢查 - 當前玩家位置: {(currentPlayerTransform != null ? currentPlayerTransform.position.ToString() : "null")}");
+            Debug.Log($"[DynamicVideoPreparationController] Update 狀態檢查 - 當前玩家位置: {(playerTransform != null ? playerTransform.position.ToString() : "null")}");
         }
         
         try
         {
-            if (currentPlayerTransform == null)
+            if (playerTransform == null)
             {
                 if (Time.frameCount % 60 == 0) // 每秒記錄一次錯誤
                 {
-                    Debug.LogError("[DynamicVideoPreparationController] currentPlayerTransform 為 null，無法計算距離");
+                    Debug.LogError("[DynamicVideoPreparationController] playerTransform 為 null，無法計算距離");
                 }
                 return;
             }
@@ -111,7 +106,7 @@ public class DynamicVideoPreparationController : MonoBehaviour
             {
                 if (info?.artwork == null || info?.controller == null) continue;
                 
-                float dist = Vector3.Distance(currentPlayerTransform.position, info.artwork.transform.position);
+                float dist = Vector3.Distance(playerTransform.position, info.artwork.transform.position);
                 
                 if (dist < loadDistance)
                 {
@@ -137,66 +132,6 @@ public class DynamicVideoPreparationController : MonoBehaviour
         {
             Debug.LogError($"[DynamicVideoPreparationController] Update方法發生錯誤: {e.Message}\n{e.StackTrace}");
         }
-    }
-
-    /// <summary>
-    /// 根據當前遊戲模式更新使用的玩家Transform
-    /// </summary>
-    private void UpdateCurrentPlayer()
-    {
-        Debug.Log("[DynamicVideoPreparationController] UpdateCurrentPlayer - 開始");
-        
-        try
-        {
-            if (GameModeManager.Instance != null)
-            {
-                Debug.Log($"[DynamicVideoPreparationController] GameModeManager 找到，當前模式: {GameModeManager.Instance.CurrentMode}");
-                
-                if (GameModeManager.Instance.CurrentMode == GameMode.VRMode)
-                {
-                    currentPlayerTransform = vrPlayerTransform;
-                    Debug.Log($"[DynamicVideoPreparationController] 設定為 VR 模式，vrPlayerTransform: {(vrPlayerTransform != null ? vrPlayerTransform.name : "null")}");
-                    if (vrPlayerTransform == null)
-                        Debug.Log("[DynamicVideoPreparationController] VR模式下但vrPlayerTransform未設定！");
-                }
-                else if (GameModeManager.Instance.CurrentMode == GameMode.MobileMode)
-                {
-                    currentPlayerTransform = testPlayerTransform;
-                    Debug.Log($"[DynamicVideoPreparationController] 設定為 Mobile 模式，testPlayerTransform: {(testPlayerTransform != null ? testPlayerTransform.name : "null")}");
-                    if (testPlayerTransform == null)
-                        Debug.Log("[DynamicVideoPreparationController] 測試模式下但testPlayerTransform未設定！");
-                }
-                else
-                {
-                    Debug.Log("[DynamicVideoPreparationController] 未知的遊戲模式，使用VR玩家作為預設");
-                    currentPlayerTransform = vrPlayerTransform;
-                }
-            }
-            else
-            {
-                Debug.Log("[DynamicVideoPreparationController] 找不到GameModeManager，使用VR玩家作為預設");
-                currentPlayerTransform = vrPlayerTransform;
-            }
-            
-            // 最終檢查：如果兩個玩家都沒設定，給出明確警告
-            if (currentPlayerTransform == null)
-            {
-                Debug.LogError("[DynamicVideoPreparationController] 當前選定的玩家Transform為空！影片載入功能將無法正常運作。");
-            }
-            else
-            {
-                Debug.Log($"[DynamicVideoPreparationController] 成功設定當前玩家: {currentPlayerTransform.name}");
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"[DynamicVideoPreparationController] UpdateCurrentPlayer發生錯誤: {e.Message}\n{e.StackTrace}");
-            // 嘗試使用任何可用的玩家作為備用
-            currentPlayerTransform = vrPlayerTransform ?? testPlayerTransform;
-            Debug.Log($"[DynamicVideoPreparationController] 使用備用玩家: {(currentPlayerTransform != null ? currentPlayerTransform.name : "null")}");
-        }
-        
-        Debug.Log("[DynamicVideoPreparationController] UpdateCurrentPlayer - 完成");
     }
 
     private class ArtworkInfo
