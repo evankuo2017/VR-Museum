@@ -21057,7 +21057,7 @@ RectTransform:
   m_GameObject: {fileID: 1541610162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 176}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 710892732}
@@ -27685,7 +27685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9032954039820430273, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_MaxRaycastDistance
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9032954039820430273, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_RaycastMask.m_Bits
@@ -27725,7 +27725,7 @@ PrefabInstance:
       objectReference: {fileID: 1313232878}
     - target: {fileID: 9146015503685400394, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_MaxRaycastDistance
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9146015503685400394, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_RaycastMask.m_Bits
