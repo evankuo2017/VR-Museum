@@ -3,9 +3,10 @@
 */
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems; // UI 事件（PointerClick/Submit）
 using System.Collections;
 
-public class ImageTouchDeactivate : MonoBehaviour
+public class ImageTouchDeactivate : MonoBehaviour, IPointerClickHandler, ISubmitHandler
 {
     private InputAction tapAction;
     private bool tapped = false;
@@ -63,5 +64,24 @@ public class ImageTouchDeactivate : MonoBehaviour
 
         // 關閉這個 GameObject
         gameObject.SetActive(false);
+    }
+
+    public void Deactivate()
+    {
+        Debug.Log("Deactivate觸發");
+        gameObject.SetActive(false);
+            
+    }
+
+    // 讓 XR 控制器的 UI Select/Click 可觸發關閉
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        StartCoroutine(DelayedUnlockAndDeactivate(delayBeforeDeactivate));
+    }
+
+    // 有些裝置會以 Submit 送出（例如按 Trigger/PrimaryButton）
+    public void OnSubmit(BaseEventData eventData)
+    {
+        StartCoroutine(DelayedUnlockAndDeactivate(delayBeforeDeactivate));
     }
 }
