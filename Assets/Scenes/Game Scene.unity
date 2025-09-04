@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 297ac69e2541fb74e98c6e6e68371327
+  m_OcclusionCullingData: {fileID: 36300000, guid: a5932ea2e2fa247c9a1097f7f7fe3a27, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -1210,6 +1210,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 49029c925b10d39479bf04e79918bd4a, type: 3}
       propertyPath: m_Name
       value: muchunGoldHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 49029c925b10d39479bf04e79918bd4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8687,6 +8691,18 @@ PrefabInstance:
     - target: {fileID: 7171126918220434959, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356487325681909641, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6903003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356487325681909641, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7235231
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356487325681909641, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -92.692
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7138380602708420071, guid: 00c45946b80bd40418223e6cfe8d284e, type: 3}
@@ -18147,6 +18163,10 @@ PrefabInstance:
     - target: {fileID: 6761255604480121094, guid: 3c2c4b921d7629e48b796fb4a16c969f, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761255604480121094, guid: 3c2c4b921d7629e48b796fb4a16c969f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

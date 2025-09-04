@@ -142,8 +142,8 @@ PlayerSettings:
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0.0
   preloadedAssets:
-  - {fileID: 5543813574329067075, guid: 76f185b6030afd2468930019ed17aa8d, type: 2}
-  - {fileID: -5540778966071894985, guid: 2aa3601acf68cf145b017d15fae349ad, type: 2}
+  - {fileID: 3715671082016124276, guid: 76f185b6030afd2468930019ed17aa8d, type: 2}
+  - {fileID: -1240048811935677513, guid: 2aa3601acf68cf145b017d15fae349ad, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -991,11 +991,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 32834d63-457b-44c9-b85b-6981f2f4870a
+  cloudProjectId: 92c3a9f0-0cb6-4caf-b536-d20e3499cd3e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: VR Museum
-  organizationId: evankuo2017
+  projectName: VR museum
+  organizationId: quisette
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
