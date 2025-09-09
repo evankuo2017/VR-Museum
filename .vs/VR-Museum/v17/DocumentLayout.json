@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\VR-Museum\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|D:\\VR-Museum\\assets\\scripts\\dynamicvideopreparationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dynamicvideopreparationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|d:\\vr-museum\\assets\\scripts\\imagetouchdeactivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\imagetouchdeactivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|D:\\VR-Museum\\assets\\scripts\\discriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\discriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImageTouchDeactivate.cs",
+              "DocumentMoniker": "D:\\VR-Museum\\Assets\\Scripts\\ImageTouchDeactivate.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ImageTouchDeactivate.cs",
+              "ToolTip": "D:\\VR-Museum\\Assets\\Scripts\\ImageTouchDeactivate.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ImageTouchDeactivate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T06:05:45.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DiscriptionController.cs",
+              "DocumentMoniker": "D:\\VR-Museum\\Assets\\Scripts\\DiscriptionController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DiscriptionController.cs",
+              "ToolTip": "D:\\VR-Museum\\Assets\\Scripts\\DiscriptionController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DiscriptionController.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADvSURBVDhPYxgFCHDx8cX/cavj/mtO0Pyv2qf6P3Jl5H\u002BoFMPbj2//q09QB/OR2SDACCIuP7n8P2JtBIOZtBlDokEiAz87P8ONNzcYwg3DGUEaTOaYgBUjAzZmNoabBTfB\u002BhlS16f\u002B91rg9f/Lly9wk5EBPhcwgYhTT08xeKh4MPDw8EBMJAGADWBlYgVjbADmhV9/fzEo9irC2ciuYIheGf0/bHkYVueDAD4vgJ188v7J/1Froxg8VD0YwrTCGFiZWRkuv7rMkG6RTtBLcAV7bu75P/X0VIa77\u002B8ycLJyMjjIOTB0enWSHCYjDzAwAADfwHLttPx8VwAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-09-04T05:36:02.862Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DynamicVideoPreparationController.cs",
+              "DocumentMoniker": "D:\\VR-Museum\\Assets\\Scripts\\DynamicVideoPreparationController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DynamicVideoPreparationController.cs",
+              "ToolTip": "D:\\VR-Museum\\Assets\\Scripts\\DynamicVideoPreparationController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DynamicVideoPreparationController.cs",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAIwLAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-03T13:03:10.393Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
