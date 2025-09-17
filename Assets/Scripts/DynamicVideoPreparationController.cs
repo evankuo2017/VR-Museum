@@ -8,12 +8,18 @@ using UnityEngine.UI;
 
 public class DynamicVideoPreparationController : MonoBehaviour
 {
+    
+
     [Header("畫作物件（請手動掛載）")]
     public List<GameObject> artworks;
     [Header("玩家Transform")]
     public Transform playerTransform;      // 玩家
     [Header("載入距離")]
     public float loadDistance = 40f;
+
+    //[Header("視角閾值 (0-180)")]
+    //[Range(0, 180)]
+    //public float viewAngleThreshold = 120f; // 只有在此角度範圍內才載入影片
 
     [Header("Loading Bar")]
     public GameObject loadingPanel;
@@ -133,6 +139,8 @@ public class DynamicVideoPreparationController : MonoBehaviour
             Debug.LogError($"[DynamicVideoPreparationController] Update方法發生錯誤: {e.Message}\n{e.StackTrace}");
         }
     }
+
+    
 
     private class ArtworkInfo
     {
