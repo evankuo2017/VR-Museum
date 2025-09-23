@@ -3577,7 +3577,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.7842, y: 5.8767, z: 0}
+  m_Size: {x: 14.338, y: 11.4696, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &310645854
 MonoBehaviour:
@@ -6343,7 +6343,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565591201}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 1.122915, y: 1.122915, z: 1.122915}
   m_ConstrainProportionsScale: 0
@@ -8085,7 +8085,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740391659}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 1.011301, y: 1.2000829, z: 0.9745402}
   m_ConstrainProportionsScale: 0
@@ -10336,11 +10336,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\u3008\u6771\u5F15\u71C8\u5854\u3009\n\n  \u66F9\u677E\u6E05\n  91X60.5cm\n 
-    \u6CB9\u5F69\u3001\u756B\u5E03\n  2024\n"
+  m_text: "\n\u3008\u5C71\u5DD4\u7FA4\u9E7F\u3009\n\n91x116.5cm\n\u6CB9\u5F69\u3001\u58D3\u514B\u529B\u3001\u756B\u5E03\n2020"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
-  m_sharedMaterial: {fileID: -5104110409900967853, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
+  m_sharedMaterial: {fileID: -7923814087700839904, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12412,11 +12411,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\u3008\u8D64\u6F6E1\u3009\n\n  \u66F9\u677E\u6E05\n  72.5x91cm\n  \u6CB9\u5F69\u3001\u756B\u5E03\n 
-    2021\n  \n \n"
+  m_text: "\n\u3008\u6D77\u4E0A\u7159\u706B\u3009\n\n91x60.5cm\n\u6CB9\u5F69\u3001\u756B\u5E03\n2025\n 
+    \n \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
-  m_sharedMaterial: {fileID: -5104110409900967853, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
+  m_sharedMaterial: {fileID: -7923814087700839904, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14993,11 +14992,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\u3008\u5CA9\u514928\u3009\n\n  \u66F9\u677E\u6E05\n  91x116.5cm\n 
-    \u6CB9\u5F69\u3001\u756B\u5E03\n  2024\n"
+  m_text: "\n\u3008\u8001\u9F20\u7802\u85CD\u773C\u6DDA\u3009\n\n72.5x91cm\n\u6CB9\u5F69\u3001\u756B\u5E03\n2023"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
-  m_sharedMaterial: {fileID: -5104110409900967853, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
+  m_sharedMaterial: {fileID: -7923814087700839904, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16617,13 +16615,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402857025}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.2849912, y: 0.2849912, z: 0.2849912}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 459018476}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.04, y: 0.4}
@@ -18886,11 +18884,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\u3008\u7D05\u82B1\u77F3\u849C\u3009\n\n  \u66F9\u677E\u6E05\n  110x110cm\n 
-    \u6CB9\u5F69\u3001\u756B\u5E03\n  2019\n\n \n"
+  m_text: "\n\u3008\u8DA3\u8CDE\u71D5\u9DD7\u3009\n\n91x72.5cm\n\u6CB9\u5F69\u3001\u756B\u5E03\n2021\n
+    \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
-  m_sharedMaterial: {fileID: -5104110409900967853, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
+  m_sharedMaterial: {fileID: -7923814087700839904, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21464,11 +21462,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\u3008\u85CD\u8272\u5C64\u3009\n\n  \u66F9\u677E\u6E05\n  91X60.5cm\n 
-    \u6CB9\u5F69\u3001\u756B\u5E03\n  2024\n\n \n"
+  m_text: "\n\u3008\u6C99\u7058\u4E0A\u7684\u85CD\u5149\u3009\n\n72.5x91cm\uFF0C\n\u6CB9\u5F69\u3001\u58D3\u514B\u529B\u984F\u6599\u3001\u756B\u5E03\n2022\n\n
+    \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
-  m_sharedMaterial: {fileID: -5104110409900967853, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
+  m_sharedMaterial: {fileID: -7923814087700839904, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22073,12 +22071,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\u3008VR Museum\u3009\n\n \u570B\u7ACB\u4E2D\u592E\u5927\u5B78CILAB\n
-    \u5C08\u6848\u8CA0\u8CAC\u4EBA \u90ED\u9038\u51E1\n\n \u85DD\u8853\u6307\u5C0E
-    \u66F9\u677E\u6E05\n \u6280\u8853\u6307\u5C0E \u8607\u6728\u6625\n \n"
+  m_text: "\n\u3008\u8239\u8207\u85CD\u773C\u6DDA5\u3009\n\n91x116.5cm\n\u6CB9\u5F69\u3001\u756B\u5E03\n2024\n
+    \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
-  m_sharedMaterial: {fileID: -5104110409900967853, guid: 93bf53d4339aa2848a12e33700778cd9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
+  m_sharedMaterial: {fileID: -7923814087700839904, guid: 8499235680cea2d48b0ab7057ff9cef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
