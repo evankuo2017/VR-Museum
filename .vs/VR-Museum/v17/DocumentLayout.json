@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\VR-Museum\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|d:\\vr-museum\\assets\\scripts\\dynamicvideopreparationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dynamicvideopreparationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|d:\\vr-museum\\assets\\scripts\\videoplayercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\videoplayercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|D:\\VR-Museum\\assets\\scripts\\imagetouchdeactivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|d:\\vr-museum\\assets\\scripts\\imagetouchdeactivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\imagetouchdeactivate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|D:\\VR-Museum\\assets\\scripts\\dynamicvideopreparationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dynamicvideopreparationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E2CB33F9-84CA-C7DD-6BD8-8BE8CFA23C71}|Assembly-CSharp.csproj|D:\\VR-Museum\\assets\\scripts\\discriptioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VideoPlayerController.cs",
+              "DocumentMoniker": "D:\\VR-Museum\\Assets\\Scripts\\VideoPlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\VideoPlayerController.cs",
+              "ToolTip": "D:\\VR-Museum\\Assets\\Scripts\\VideoPlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\VideoPlayerController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAgwHUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T08:26:30.298Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -32,13 +49,14 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\ImageTouchDeactivate.cs",
               "ToolTip": "D:\\VR-Museum\\Assets\\Scripts\\ImageTouchDeactivate.cs",
               "RelativeToolTip": "Assets\\Scripts\\ImageTouchDeactivate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T06:05:45.741Z"
+              "WhenOpened": "2025-09-08T06:05:45.741Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DiscriptionController.cs",
               "DocumentMoniker": "D:\\VR-Museum\\Assets\\Scripts\\DiscriptionController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DiscriptionController.cs",
@@ -50,16 +68,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "DynamicVideoPreparationController.cs",
               "DocumentMoniker": "D:\\VR-Museum\\Assets\\Scripts\\DynamicVideoPreparationController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DynamicVideoPreparationController.cs",
               "ToolTip": "D:\\VR-Museum\\Assets\\Scripts\\DynamicVideoPreparationController.cs",
               "RelativeToolTip": "Assets\\Scripts\\DynamicVideoPreparationController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAADwvwoAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAwAoAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-03T13:03:10.393Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-03T13:03:10.393Z"
             }
           ]
         }
