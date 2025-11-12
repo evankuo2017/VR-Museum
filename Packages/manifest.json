@@ -2,6 +2,9 @@
   "dependencies": {
     "com.google.xr.cardboard": "https://github.com/googlevr/cardboard-xr-plugin.git",
     "com.htc.upm.vive.openxr": "https://github.com/ViveSoftware/VIVE-OpenXR.git?path=com.htc.upm.vive.openxr",
+    "com.htc.upm.wave.essence": "https://github.com/ViveSoftware/VIVE-Wave.git?path=com.htc.upm.wave.essence",
+    "com.htc.upm.wave.native": "https://github.com/ViveSoftware/VIVE-Wave.git?path=com.htc.upm.wave.native",
+    "com.htc.upm.wave.xrsdk": "https://github.com/ViveSoftware/VIVE-Wave.git?path=com.htc.upm.wave.xrsdk",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.muse.chat": "1.1.1-pre.3",
@@ -10,6 +13,7 @@
     "com.unity.timeline": "1.7.6",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.4",
+    "com.unity.xr.interaction.toolkit": "2.6.3",
     "com.unity.xr.openxr": "1.14.2",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -41,7 +45,6 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.unity.xr.interaction.toolkit": "2.6.3"
+    "com.unity.modules.xr": "1.0.0"
   }
 }

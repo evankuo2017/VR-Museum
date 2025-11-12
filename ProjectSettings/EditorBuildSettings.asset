@@ -30,5 +30,6 @@ EditorBuildSettings:
     path: Assets/Samples/XR Interaction Toolkit/2.6.3/Starter Assets/DemoScene.unity
     guid: 319dafa5c80f29f428dc1e0d03f04177
   m_configObjects:
+    com.htc.upm.wave.xrsdk.xrsettings: {fileID: 11400000, guid: 4486294792cc8fb4b97c88fab56b1641, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 76f185b6030afd2468930019ed17aa8d, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 2aa3601acf68cf145b017d15fae349ad, type: 2}

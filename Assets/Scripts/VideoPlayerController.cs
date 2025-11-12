@@ -18,7 +18,7 @@ public class VideoPlayerController : MonoBehaviour
 
     [Header("影片設定")]
     [SerializeField] private string videoPath; // 影片在Resources資料夾中的路徑，例如："Videos/MyVideo"
-
+    [SerializeField] private float stopDelay = 0.12f; // 延遲停止以避免快速放開誤判
     private bool isVideoLoaded = false;
     private bool isVideoPrepared = false;
     private bool isPlaying = false;
@@ -110,7 +110,7 @@ public class VideoPlayerController : MonoBehaviour
         isVideoPrepared = true;
         
         // Capture first frame to use as overlay and prevent gray flash
-        StartCoroutine(CaptureFirstFrame(vp));
+        // StartCoroutine(CaptureFirstFrame(vp));
         
         string videoName = vp.clip != null ? vp.clip.name : "未命名影片";
         Debug.Log($"[{gameObject.name}] 影片準備完成: {videoName}");
@@ -124,9 +124,48 @@ public class VideoPlayerController : MonoBehaviour
         else
         {
             // 只抓第一幀，不播放
-            StartCoroutine(CaptureFirstFrame(vp));
+            // StartCoroutine(CaptureFirstFrame(vp));
+            // 只在背景抓第一幀，不改變 display/preview（避免 pointer 只是指到就替換 UI）
+            StartCoroutine(CaptureFirstFrameInBackground(vp));
         }
     }
+
+       // 擷取第一幀但不要改變 displayImage / previewImage（背景用）
+    private IEnumerator CaptureFirstFrameInBackground(VideoPlayer vp)
+    {
+        // Set video to first frame and play briefly to capture it
+        vp.time = 0;
+        vp.Play();
+        
+        // Wait a couple of frames to ensure the video texture is updated
+        yield return null;
+        yield return null;
+
+        // Capture the first frame into firstFrameTexture but do NOT assign to displayImage
+        if (vp.texture != null)
+        {
+            RenderTexture currentRT = RenderTexture.active;
+            RenderTexture tempRT = RenderTexture.GetTemporary(vp.texture.width, vp.texture.height, 0, RenderTextureFormat.ARGB32);
+            
+            Graphics.Blit(vp.texture, tempRT);
+            RenderTexture.active = tempRT;
+            
+            firstFrameTexture = new Texture2D(tempRT.width, tempRT.height, TextureFormat.RGB24, false);
+            firstFrameTexture.ReadPixels(new Rect(0, 0, tempRT.width, tempRT.height), 0, 0);
+            firstFrameTexture.Apply();
+            
+            RenderTexture.active = currentRT;
+            RenderTexture.ReleaseTemporary(tempRT);
+            
+            Debug.Log($"[{gameObject.name}] (background) 已擷取第一幀作為覆蓋圖");
+        }
+        
+        // Pause video and reset to first frame
+        vp.Pause();
+        vp.time = 0;
+        // NOTE: do NOT set displayImage.texture or hide previewImage here
+    }
+
 
     // 新增協程
     private IEnumerator PlayAfterFirstFrame(VideoPlayer vp)
@@ -138,6 +177,9 @@ public class VideoPlayerController : MonoBehaviour
             displayImage.texture = vp.texture;
             displayImage.enabled = true;
         }
+         // hide preview only when we actually set the video texture / about to play
+        if (previewImage != null) previewImage.gameObject.SetActive(false);
+
         vp.Play();
         isPlaying = true;
         string videoName = vp.clip != null ? vp.clip.name : "未命名影片";
@@ -182,6 +224,9 @@ public class VideoPlayerController : MonoBehaviour
         {
             displayImage.texture = firstFrameTexture;
             displayImage.enabled = true;
+
+            // hide preview only after we've assigned the first frame to displayImage
+            if (previewImage != null) previewImage.gameObject.SetActive(false);
         }
     }
 
@@ -204,7 +249,7 @@ public class VideoPlayerController : MonoBehaviour
 
     private void ShowAndPlayVideo()
     {
-        if (displayImage != null) displayImage.enabled = true;
+        // if (displayImage != null) displayImage.enabled = true;
         if (videoPlayer != null)
         {
             if (videoPlayer.isPlaying)
@@ -227,8 +272,11 @@ public class VideoPlayerController : MonoBehaviour
                 if (displayImage != null)
                 {
                     displayImage.texture = videoPlayer.texture;
+                    displayImage.enabled = true;
                 }
-                
+                // hide preview only when we actually show video texture
+                if (previewImage != null) previewImage.gameObject.SetActive(false);
+
                 videoPlayer.Play();
                 isPlaying = true;
                 string videoName = videoPlayer.clip != null ? videoPlayer.clip.name : "未命名影片";
@@ -245,6 +293,8 @@ public class VideoPlayerController : MonoBehaviour
 
     public void StopAndHide()
     {
+        // 取消等待播放旗標，避免 prepare/completed 時自動播放被中斷或殘留旗標
+        playOnPrepared = false;
         if (videoPlayer != null)
         {
             videoPlayer.Pause();
@@ -275,11 +325,11 @@ public class VideoPlayerController : MonoBehaviour
         Debug.Log($"[{gameObject.name}] OnPointerClick");
         // 點擊時第一步就隱藏預覽圖，避免黑屏
         // Hide preview image immediately on click to avoid black screen
-        if (previewImage != null)
-        {
-            previewImage.gameObject.SetActive(false);
-            Debug.Log($"[{gameObject.name}] 點擊時隱藏預覽圖片");
-        }
+        // if (previewImage != null)
+        // {
+        //     previewImage.gameObject.SetActive(false);
+        //     Debug.Log($"[{gameObject.name}] 點擊時隱藏預覽圖片");
+        // }
         ShowAndPlayVideo();
     }
 
@@ -287,9 +337,24 @@ public class VideoPlayerController : MonoBehaviour
     public void OnPointerExit()
     {
         Debug.Log($"[{gameObject.name}] OnPointerExit");
-        StopAndHide();
-    }
+        // StopAndHide();
+        // 延遲停止，避免快速放開造成正在準備或等待播放被中止
+        StartCoroutine(DelayedStopIfNotPlaying());
 
+    }
+    private IEnumerator DelayedStopIfNotPlaying()
+    {
+        yield return new WaitForSeconds(stopDelay);
+        // 若尚未播放且也沒在等待自動播放，才真正停止
+        if (!isPlaying && !playOnPrepared)
+        {
+            StopAndHide();
+        }
+        else
+        {
+            Debug.Log($"[{gameObject.name}] Skip StopAndHide because isPlaying={isPlaying} playOnPrepared={playOnPrepared}");
+        }
+    }
     private void OnDestroy()
     {
         // Clean up first frame texture when object is destroyed
